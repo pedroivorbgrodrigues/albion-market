@@ -57,27 +57,61 @@
           <v-radio label="10 days" value="10"></v-radio>
         </v-radio-group>
       </v-col>
+      <v-col>
+        <v-chip
+          v-for="(value, key) in cityColors"
+          label
+          :key="key"
+          class="ma-2"
+          dark
+          :color="value"
+        >{{key}}</v-chip>
+      </v-col>
     </v-row>
     <v-row>
-      <v-col v-for="item in results" :key="item.id">
-        <v-card :color="item.color" dark>
-          <v-list-item three-line>
-            <v-list-item-avatar size="128" tile>
-              <v-img :src="icon(item.id)"></v-img>
-            </v-list-item-avatar>
-            <v-list-item-content class="align-self-start">
-              <v-list-item-title class="headline mb-2" v-text="item.name"></v-list-item-title>
-              <div>
-                <v-chip v-for="(city, key) in filtered(item.cities)" :key="key" class="ma-2" dark :color="cityColor(key)">{{key}} ({{shortDate(city.date)}}) - {{city.price}}</v-chip>
-              </div>
-            </v-list-item-content>
-          </v-list-item>
+      <v-col cols="2" v-for="item in results" :key="item.id">
+        <v-card min-height="466" :color="item.color">
+          <v-list>
+            <v-list-item>
+              <v-list-item-avatar size="64" tile>
+                <v-img :src="icon(item.id)"></v-img>
+              </v-list-item-avatar>
+              <v-list-item-content>
+                <v-list-item-title class="headline mb-2" v-text="item.name"></v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+          <v-list>
+            <v-subheader>Travels</v-subheader>
+            <div v-for="(travel, index) in processed(item.cities)" :key="index">
+              <v-list-item :style="gradient(travel.from, travel.to)">
+                <v-list-item-content class="align-self-start">
+                  <v-list-item-title
+                    class="white--text"
+                  >{{travel.rentability}}% - {{travel.from}} ==> {{travel.to}}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-divider></v-divider>
+            </div>
+          </v-list>
+          <v-list>
+            <v-subheader>Prices</v-subheader>
+            <div v-for="city in filtered(item.cities)" :key="city.name">
+              <v-list-item :style="`background-color: ${cityColor(city.name)}`">
+                <v-list-item-content class="align-self-start">
+                  <v-list-item-title
+                    class="white--text"
+                  >{{city.name}} - {{city.price}} - {{shortDate(city.date)}}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-divider></v-divider>
+            </div>
+          </v-list>
         </v-card>
       </v-col>
     </v-row>
   </v-container>
 </template>
-
 <script>
 import items from '../../items.json'
 import axios from 'axios'
@@ -86,7 +120,6 @@ import { format, differenceInDays } from 'date-fns'
 const baseImageUrl =
   'https://albiononline2d.ams3.cdn.digitaloceanspaces.com/thumbnails/128'
 const api = 'https://www.albion-online-data.com/api/v1/stats/prices'
-const cityColors = { 'Black Market': 'black', 'Caerleon': 'red', 'Bridgewatch': 'orange', 'Fort Sterling': 'grey', 'Lymhurst': 'green', 'Thetford': 'purple', 'Martlock': 'blue' }
 export default {
   data () {
     return {
@@ -95,6 +128,15 @@ export default {
       isUpdating: false,
       items: items,
       results: [],
+      cityColors: {
+        'Black Market': 'black',
+        Caerleon: 'red',
+        Bridgewatch: 'orange',
+        'Fort Sterling': 'grey',
+        Lymhurst: 'green',
+        Thetford: 'purple',
+        Martlock: 'blue'
+      },
       period: '1'
     }
   },
@@ -110,6 +152,11 @@ export default {
       let cleanId = id.split('@')[0]
       return `${baseImageUrl}/${cleanId}`
     },
+    gradient (from, to) {
+      const fromColor = this.cityColor(from)
+      const toColor = this.cityColor(to)
+      return `background: linear-gradient(.25turn, ${fromColor}, ${toColor});`
+    },
     remove (item) {
       const index = this.selected.indexOf(item.id)
       if (index >= 0) {
@@ -120,7 +167,7 @@ export default {
       return format(date, 'dd/MM/yy')
     },
     cityColor (city) {
-      return cityColors[city]
+      return this.cityColors[city]
     },
     getPrices () {
       if (this.selected.length <= 0) {
@@ -130,26 +177,41 @@ export default {
       axios.get(`${api}/${selectedItems}`).then(response => {
         const results = response.data.reduce((prices, current) => {
           if (!prices.hasOwnProperty(current.item_id)) {
-            const name = this.items.find(item => item.id === current.item_id).name
-            prices[current.item_id] = { id: current.item_id, name, cities: {} }
+            const name = this.items.find(item => item.id === current.item_id)
+              .name
+            prices[current.item_id] = { id: current.item_id, name, cities: [] }
           }
-          prices[current.item_id].cities[current.city] = {
+          prices[current.item_id].cities.push({
+            name: current.city,
             price: current.sell_price_min,
             date: new Date(current.sell_price_min_date)
-          }
+          })
           return prices
         }, {})
         this.results = Object.values(results)
       })
     },
     filtered (cities) {
-      return Object.entries(cities).reduce((acc, keyPair) => {
-        const diff = differenceInDays(new Date(), keyPair[1].date)
-        if (diff <= this.period) {
-          acc[keyPair[0]] = keyPair[1]
-        }
-        return acc
+      return cities.filter(city => {
+        const diff = differenceInDays(new Date(), city.date)
+        return diff <= this.period
       }, {})
+    },
+    processed (cities) {
+      const ordered = this.filtered(cities).sort((a, b) => a.price - b.price)
+      return ordered
+        .reduce((travels, city, index) => {
+          if (index > 0) {
+            const rentability = city.price / ordered[0].price - 1
+            travels.push({
+              from: ordered[0].name,
+              to: city.name,
+              rentability: rentability.toFixed(2)
+            })
+          }
+          return travels
+        }, [])
+        .sort((a, b) => b.rentability - a.rentability)
     }
   }
 }

@@ -48,6 +48,17 @@
       </v-col>
     </v-row>
     <v-row>
+      <v-col cols="4">
+        <div class="title">Last update period</div>
+        <v-radio-group v-model="period" row>
+          <v-radio label="1 day" value="1"></v-radio>
+          <v-radio label="3 days" value="3"></v-radio>
+          <v-radio label="7 days" value="7"></v-radio>
+          <v-radio label="10 days" value="10"></v-radio>
+        </v-radio-group>
+      </v-col>
+    </v-row>
+    <v-row>
       <v-col v-for="item in results" :key="item.id">
         <v-card :color="item.color" dark>
           <v-list-item three-line>
@@ -56,7 +67,9 @@
             </v-list-item-avatar>
             <v-list-item-content class="align-self-start">
               <v-list-item-title class="headline mb-2" v-text="item.name"></v-list-item-title>
-              <v-chip v-for="(city, key) in item.cities" :key="key" class="ma-2" color="primary">{{city.min}}</v-chip>
+              <div>
+                <v-chip v-for="(city, key) in filtered(item.cities)" :key="key" class="ma-2" dark :color="cityColor(key)">{{key}} ({{shortDate(city.date)}}) - {{city.price}}</v-chip>
+              </div>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -68,9 +81,12 @@
 <script>
 import items from '../../items.json'
 import axios from 'axios'
+import { format, differenceInDays } from 'date-fns'
+
 const baseImageUrl =
   'https://albiononline2d.ams3.cdn.digitaloceanspaces.com/thumbnails/128'
 const api = 'https://www.albion-online-data.com/api/v1/stats/prices'
+const cityColors = { 'Black Market': 'black', 'Caerleon': 'red', 'Bridgewatch': 'orange', 'Fort Sterling': 'grey', 'Lymhurst': 'green', 'Thetford': 'purple', 'Martlock': 'blue' }
 export default {
   data () {
     return {
@@ -78,7 +94,8 @@ export default {
       selected: [],
       isUpdating: false,
       items: items,
-      results: []
+      results: [],
+      period: '1'
     }
   },
   watch: {
@@ -90,13 +107,20 @@ export default {
   },
   methods: {
     icon (id) {
-      return `${baseImageUrl}/${id}`
+      let cleanId = id.split('@')[0]
+      return `${baseImageUrl}/${cleanId}`
     },
     remove (item) {
       const index = this.selected.indexOf(item.id)
       if (index >= 0) {
         this.selected.splice(index, 1)
       }
+    },
+    shortDate (date) {
+      return format(date, 'dd/MM/yy')
+    },
+    cityColor (city) {
+      return cityColors[city]
     },
     getPrices () {
       if (this.selected.length <= 0) {
@@ -110,14 +134,22 @@ export default {
             prices[current.item_id] = { id: current.item_id, name, cities: {} }
           }
           prices[current.item_id].cities[current.city] = {
-            min: current.sell_price_min,
-            max: current.sell_price_max,
-            date: current.sell_price_min_date
+            price: current.sell_price_min,
+            date: new Date(current.sell_price_min_date)
           }
           return prices
         }, {})
         this.results = Object.values(results)
       })
+    },
+    filtered (cities) {
+      return Object.entries(cities).reduce((acc, keyPair) => {
+        const diff = differenceInDays(new Date(), keyPair[1].date)
+        if (diff <= this.period) {
+          acc[keyPair[0]] = keyPair[1]
+        }
+        return acc
+      }, {})
     }
   }
 }

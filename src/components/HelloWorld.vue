@@ -43,11 +43,6 @@
           </template>
         </v-autocomplete>
       </v-col>
-      <v-col cols="1">
-        <v-btn min-height="68" color="warning" @click="getPrices" dark>Get Prices</v-btn>
-      </v-col>
-    </v-row>
-    <v-row>
       <v-col cols="4">
         <div class="title">Last update period</div>
         <v-radio-group v-model="period" row>
@@ -57,7 +52,13 @@
           <v-radio label="10 days" value="10"></v-radio>
         </v-radio-group>
       </v-col>
-      <v-col>
+      <v-col cols="1" xs="12" md="2">
+        <v-btn min-height="68" color="warning" @click="getPrices" dark>Get Prices</v-btn>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col xs="12">
+        <div class="title">Legend</div>
         <v-chip
           v-for="(value, key) in cityColors"
           label
@@ -69,7 +70,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="3" v-for="item in results" :key="item.id">
+      <v-col cols="4" v-for="item in itemsByPeriod" :key="item.id">
         <v-card min-height="466" :color="item.color">
           <v-list>
             <v-list-item>
@@ -83,12 +84,16 @@
           </v-list>
           <v-list>
             <v-subheader>Travels</v-subheader>
-            <div v-for="(travel, index) in processed(item.cities)" :key="index">
+            <div v-for="(travel, index) in item.travels" :key="index">
               <v-list-item :style="gradient(travel.from, travel.to)">
                 <v-list-item-content class="align-self-start">
-                  <v-list-item-title
-                    class="white--text"
-                  >{{travel.rentability}}% - {{travel.from}} <v-icon color="white">mdi-arrow-right</v-icon> {{travel.to}}</v-list-item-title>
+                  <v-list-item-title class="white--text">
+                    {{travel.rentability}}% - {{travel.from}}
+                    <v-icon color="white">mdi-arrow-right</v-icon>
+                    {{travel.to}}
+                    <v-icon color="white">mdi-cash-usd-outline</v-icon>
+                    {{travel.profit}}
+                  </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
               <v-divider></v-divider>
@@ -96,12 +101,12 @@
           </v-list>
           <v-list>
             <v-subheader>Prices</v-subheader>
-            <div v-for="city in filtered(item.cities)" :key="city.name">
+            <div v-for="city in item.cities" :key="city.name">
               <v-list-item :style="`background-color: ${cityColor(city.name)}`">
                 <v-list-item-content class="align-self-start">
-                  <v-list-item-title class="white--text">
-                    {{city.name}} - {{city.price}} - {{shortDate(city.date)}}
-                  </v-list-item-title>
+                  <v-list-item-title
+                    class="white--text"
+                  >{{city.name}} - {{city.price}} - {{shortDate(city.date)}}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
               <v-divider></v-divider>
@@ -115,7 +120,7 @@
 <script>
 import items from '../../items.json'
 import axios from 'axios'
-import { format, differenceInDays } from 'date-fns'
+import { format } from 'date-fns'
 
 const baseImageUrl =
   'https://albiononline2d.ams3.cdn.digitaloceanspaces.com/thumbnails/128'
@@ -147,10 +152,16 @@ export default {
       }
     }
   },
+  computed: {
+    itemsByPeriod: function () {
+      return this.results.map(item => {
+        return { ...item, cities: item.cities }
+      }).filter(item => item.cities.length > 2)
+    }
+  },
   methods: {
     icon (id) {
-      let cleanId = id.split('@')[0]
-      return `${baseImageUrl}/${cleanId}`
+      return `${baseImageUrl}/${id}`
     },
     gradient (from, to) {
       const fromColor = this.cityColor(from)
@@ -169,38 +180,23 @@ export default {
     cityColor (city) {
       return this.cityColors[city]
     },
+    byCategory (category) {
+      this.selected = this.items
+        .filter(item => item.inclueds(category))
+        .map(item => item.id)
+    },
     getPrices () {
       if (this.selected.length <= 0) {
         return
       }
-      axios.post(`${api}/pricesByIds`, { ids: this.selected }).then(response => {
-        this.results = response.data.items.map(item => {
-          const name = this.items.find(i => i.id === item.id).name
-          return { ...item, name }
+      axios
+        .post(`${api}/pricesByIds`, { ids: this.selected, period: this.period })
+        .then(response => {
+          this.results = response.data.items.map(item => {
+            const name = this.items.find(i => i.id === item.id).name
+            return { ...item, name }
+          })
         })
-      })
-    },
-    filtered (cities) {
-      return cities.filter(city => {
-        const diff = differenceInDays(new Date(), new Date(city.date))
-        return diff <= this.period
-      }, {})
-    },
-    processed (cities) {
-      const ordered = this.filtered(cities).sort((a, b) => a.price - b.price)
-      return ordered
-        .reduce((travels, city, index) => {
-          if (index > 0) {
-            const rentability = ((city.price / ordered[0].price) - 1) * 100
-            travels.push({
-              from: ordered[0].name,
-              to: city.name,
-              rentability: rentability.toFixed(2)
-            })
-          }
-          return travels
-        }, [])
-        .sort((a, b) => b.rentability - a.rentability)
     }
   }
 }

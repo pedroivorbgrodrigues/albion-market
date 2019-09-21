@@ -69,7 +69,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="2" v-for="item in results" :key="item.id">
+      <v-col cols="3" v-for="item in results" :key="item.id">
         <v-card min-height="466" :color="item.color">
           <v-list>
             <v-list-item>
@@ -88,7 +88,7 @@
                 <v-list-item-content class="align-self-start">
                   <v-list-item-title
                     class="white--text"
-                  >{{travel.rentability}}% - {{travel.from}} ==> {{travel.to}}</v-list-item-title>
+                  >{{travel.rentability}}% - {{travel.from}} <v-icon color="white">mdi-arrow-right</v-icon> {{travel.to}}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
               <v-divider></v-divider>
@@ -99,9 +99,9 @@
             <div v-for="city in filtered(item.cities)" :key="city.name">
               <v-list-item :style="`background-color: ${cityColor(city.name)}`">
                 <v-list-item-content class="align-self-start">
-                  <v-list-item-title
-                    class="white--text"
-                  >{{city.name}} - {{city.price}} - {{shortDate(city.date)}}</v-list-item-title>
+                  <v-list-item-title class="white--text">
+                    {{city.name}} - {{city.price}} - {{shortDate(city.date)}}
+                  </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
               <v-divider></v-divider>
@@ -119,7 +119,7 @@ import { format, differenceInDays } from 'date-fns'
 
 const baseImageUrl =
   'https://albiononline2d.ams3.cdn.digitaloceanspaces.com/thumbnails/128'
-const api = 'https://www.albion-online-data.com/api/v1/stats/prices'
+const api = 'http://localhost:5000/albion-ah/us-central1'
 export default {
   data () {
     return {
@@ -164,7 +164,7 @@ export default {
       }
     },
     shortDate (date) {
-      return format(date, 'dd/MM/yy')
+      return format(new Date(date), 'dd/MM/yy')
     },
     cityColor (city) {
       return this.cityColors[city]
@@ -173,27 +173,16 @@ export default {
       if (this.selected.length <= 0) {
         return
       }
-      const selectedItems = this.selected.join(',')
-      axios.get(`${api}/${selectedItems}`).then(response => {
-        const results = response.data.reduce((prices, current) => {
-          if (!prices.hasOwnProperty(current.item_id)) {
-            const name = this.items.find(item => item.id === current.item_id)
-              .name
-            prices[current.item_id] = { id: current.item_id, name, cities: [] }
-          }
-          prices[current.item_id].cities.push({
-            name: current.city,
-            price: current.sell_price_min,
-            date: new Date(current.sell_price_min_date)
-          })
-          return prices
-        }, {})
-        this.results = Object.values(results)
+      axios.post(`${api}/pricesByIds`, { ids: this.selected }).then(response => {
+        this.results = response.data.items.map(item => {
+          const name = this.items.find(i => i.id === item.id).name
+          return { ...item, name }
+        })
       })
     },
     filtered (cities) {
       return cities.filter(city => {
-        const diff = differenceInDays(new Date(), city.date)
+        const diff = differenceInDays(new Date(), new Date(city.date))
         return diff <= this.period
       }, {})
     },
@@ -202,7 +191,7 @@ export default {
       return ordered
         .reduce((travels, city, index) => {
           if (index > 0) {
-            const rentability = city.price / ordered[0].price - 1
+            const rentability = ((city.price / ordered[0].price) - 1) * 100
             travels.push({
               from: ordered[0].name,
               to: city.name,

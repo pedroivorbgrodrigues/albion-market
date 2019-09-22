@@ -68,9 +68,13 @@
           :color="value"
         >{{key}}</v-chip>
       </v-col>
+      <v-col cols="1" xs="12" md="2">
+        <v-btn min-height="68" color="warning" @click="getBestPrices" dark>Get All Prices</v-btn>
+      </v-col>
     </v-row>
     <v-row>
-      <v-col cols="4" v-for="item in itemsByPeriod" :key="item.id">
+      <v-progress-circular v-if="loading" :size="70" :width="7" color="purple" indeterminate></v-progress-circular>
+      <v-col cols="4" v-for="item in results" :key="item.id">
         <v-card min-height="466" :color="item.color">
           <v-list>
             <v-list-item>
@@ -115,23 +119,31 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-row v-if="pageCount > 0">
+      <v-col cols="12">
+         <v-pagination v-model="page" :length="pageCount" :total-visible="7"></v-pagination>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 <script>
-import items from '../../items.json'
-import axios from 'axios'
 import { format } from 'date-fns'
+
+import { pricesByIds, getItems, getBestPricesByPage } from '../services/api'
 
 const baseImageUrl =
   'https://albiononline2d.ams3.cdn.digitaloceanspaces.com/thumbnails/128'
-const api = 'http://localhost:5000/albion-ah/us-central1'
+
 export default {
+  created: function () {
+    this.items = getItems()
+  },
   data () {
     return {
       autoUpdate: true,
       selected: [],
       isUpdating: false,
-      items: items,
+      items: [],
       results: [],
       cityColors: {
         'Black Market': 'black',
@@ -142,7 +154,11 @@ export default {
         Thetford: 'purple',
         Martlock: 'blue'
       },
-      period: '1'
+      period: '1',
+      page: 1,
+      perPage: 9,
+      pageCount: 0,
+      loading: false
     }
   },
   watch: {
@@ -150,13 +166,9 @@ export default {
       if (val) {
         setTimeout(() => (this.isUpdating = false), 3000)
       }
-    }
-  },
-  computed: {
-    itemsByPeriod: function () {
-      return this.results.map(item => {
-        return { ...item, cities: item.cities }
-      }).filter(item => item.cities.length > 2)
+    },
+    page (val) {
+      this.getBestPrices()
     }
   },
   methods: {
@@ -189,14 +201,16 @@ export default {
       if (this.selected.length <= 0) {
         return
       }
-      axios
-        .post(`${api}/pricesByIds`, { ids: this.selected, period: this.period })
-        .then(response => {
-          this.results = response.data.items.map(item => {
-            const name = this.items.find(i => i.id === item.id).name
-            return { ...item, name }
-          })
-        })
+      pricesByIds(this.selected, parseInt(this.period))
+        .then(processedItems => { this.results = processedItems })
+    },
+    getBestPrices () {
+      this.loading = true
+      getBestPricesByPage(this.period, this.page).then(result => {
+        this.pageCount = result.pageCount
+        this.results = result.pageItems
+        this.loading = false
+      })
     }
   }
 }

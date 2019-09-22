@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col>
+      <v-col cols="12">
         <v-autocomplete
           v-model="selected"
           :disabled="isUpdating"
@@ -43,21 +43,22 @@
           </template>
         </v-autocomplete>
       </v-col>
-      <v-col cols="4">
+    </v-row>
+    <v-row>
+      <v-col cols="12" md="10">
         <div class="title">Last update period</div>
         <v-radio-group v-model="period" row>
           <v-radio label="1 day" value="1"></v-radio>
           <v-radio label="3 days" value="3"></v-radio>
           <v-radio label="7 days" value="7"></v-radio>
-          <v-radio label="10 days" value="10"></v-radio>
         </v-radio-group>
       </v-col>
-      <v-col cols="1" xs="12" md="2">
-        <v-btn min-height="68" color="warning" @click="getPrices" dark>Get Prices</v-btn>
+      <v-col cols="12" md="2">
+        <v-btn block min-height="68" @click="getPrices" dark>Get Prices</v-btn>
       </v-col>
     </v-row>
     <v-row>
-      <v-col xs="12">
+      <v-col cols="12">
         <div class="title">Legend</div>
         <v-chip
           v-for="(value, key) in cityColors"
@@ -68,14 +69,16 @@
           :color="value"
         >{{key}}</v-chip>
       </v-col>
-      <v-col cols="1" xs="12" md="2">
-        <v-btn min-height="68" color="warning" @click="getBestPrices" dark>Get All Prices</v-btn>
+    </v-row>
+    <v-row>
+      <v-col cols="12">
+        <v-btn block min-height="68" color="primary" @click="getBestPrices" dark>Get best prices</v-btn>
       </v-col>
     </v-row>
     <v-row>
       <v-progress-circular v-if="loading" :size="70" :width="7" color="purple" indeterminate></v-progress-circular>
-      <v-col cols="4" v-for="item in results" :key="item.id">
-        <v-card min-height="466" :color="item.color">
+      <v-col cols="12" md="4" v-for="item in results" :key="item.id">
+        <v-card :color="item.color">
           <v-list>
             <v-list-item>
               <v-list-item-avatar size="64" tile>
@@ -86,8 +89,10 @@
               </v-list-item-content>
             </v-list-item>
           </v-list>
-          <v-list>
-            <v-subheader>Travels</v-subheader>
+          <v-list-group value="true">
+            <template v-slot:activator>
+              <v-list-item-title>Travels</v-list-item-title>
+            </template>
             <div v-for="(travel, index) in item.travels" :key="index">
               <v-list-item :style="gradient(travel.from, travel.to)">
                 <v-list-item-content class="align-self-start">
@@ -102,9 +107,11 @@
               </v-list-item>
               <v-divider></v-divider>
             </div>
-          </v-list>
-          <v-list>
-            <v-subheader>Prices</v-subheader>
+          </v-list-group>
+          <v-list-group>
+             <template v-slot:activator>
+              <v-list-item-title>Prices</v-list-item-title>
+            </template>
             <div v-for="city in item.cities" :key="city.name">
               <v-list-item :style="`background-color: ${cityColor(city.name)}`">
                 <v-list-item-content class="align-self-start">
@@ -115,13 +122,13 @@
               </v-list-item>
               <v-divider></v-divider>
             </div>
-          </v-list>
+          </v-list-group>
         </v-card>
       </v-col>
     </v-row>
     <v-row v-if="pageCount > 0">
       <v-col cols="12">
-         <v-pagination v-model="page" :length="pageCount" :total-visible="7"></v-pagination>
+        <v-pagination v-model="page" :length="pageCount"></v-pagination>
       </v-col>
     </v-row>
   </v-container>
@@ -201,8 +208,9 @@ export default {
       if (this.selected.length <= 0) {
         return
       }
-      pricesByIds(this.selected, parseInt(this.period))
-        .then(processedItems => { this.results = processedItems })
+      pricesByIds(this.selected, parseInt(this.period)).then(processedItems => {
+        this.results = processedItems
+      })
     },
     getBestPrices () {
       this.loading = true

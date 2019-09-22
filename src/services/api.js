@@ -25,18 +25,20 @@ const groupCitiesByItemId = (period, prices, current) => {
   return prices
 }
 
-const outlier = 400
+const rentabilityOutlier = 400
+const profitOutlier = 200000
 const calculateTravels = (travels, city, index, sorted) => {
   if (index > 0) {
     let rentability = (city.price / sorted[0].price - 1) * 100
-    if (rentability > outlier) {
+    const profit = city.price - sorted[0].price
+    if (rentability > rentabilityOutlier && profit > profitOutlier) {
       rentability = 0
     }
     travels.push({
       from: sorted[0].name,
       to: city.name,
       rentability: rentability.toFixed(2),
-      profit: city.price - sorted[0].price
+      profit: profit
     })
   }
   return travels

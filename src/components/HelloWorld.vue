@@ -1,5 +1,8 @@
 <template>
   <v-container>
+    <v-overlay :value="overlay" v-if="loading">
+      <v-progress-circular :size="128" indeterminate></v-progress-circular>
+    </v-overlay>
     <v-row>
       <v-col cols="12">
         <v-autocomplete
@@ -45,38 +48,14 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" md="10">
-        <div class="title">Last update period</div>
-        <v-radio-group v-model="period" row>
-          <v-radio label="1 day" value="1"></v-radio>
-          <v-radio label="3 days" value="3"></v-radio>
-          <v-radio label="7 days" value="7"></v-radio>
-        </v-radio-group>
+      <v-col cols="12" v-if="selected.length > 0">
+        <v-btn block min-height="68" @click="getPrices" dark>Get travels for selected</v-btn>
       </v-col>
-      <v-col cols="12" md="2">
-        <v-btn block min-height="68" @click="getPrices" dark>Get Prices</v-btn>
+      <v-col cols="12" v-if="selected.length == 0">
+        <v-btn block min-height="68" color="primary" @click="getBestPrices" dark>Get best travels</v-btn>
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12">
-        <div class="title">Legend</div>
-        <v-chip
-          v-for="(value, key) in cityColors"
-          label
-          :key="key"
-          class="ma-2"
-          dark
-          :color="value"
-        >{{key}}</v-chip>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12">
-        <v-btn block min-height="68" color="primary" @click="getBestPrices" dark>Get best prices</v-btn>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-progress-circular v-if="loading" :size="70" :width="7" color="purple" indeterminate></v-progress-circular>
       <v-col cols="12" md="4" v-for="item in results" :key="item.id">
         <v-card :color="item.color">
           <v-list>
@@ -94,7 +73,7 @@
               <v-list-item-title>Travels</v-list-item-title>
             </template>
             <div v-for="(travel, index) in item.travels" :key="index">
-              <v-list-item :style="gradient(travel.from, travel.to)">
+              <v-list-item v-if="travel.rentability > 0" :style="gradient(travel.from, travel.to)">
                 <v-list-item-content class="align-self-start">
                   <v-list-item-title class="white--text">
                     {{travel.rentability}}% - {{travel.from}}
@@ -109,7 +88,7 @@
             </div>
           </v-list-group>
           <v-list-group>
-             <template v-slot:activator>
+            <template v-slot:activator>
               <v-list-item-title>Prices</v-list-item-title>
             </template>
             <div v-for="city in item.cities" :key="city.name">
@@ -161,7 +140,7 @@ export default {
         Thetford: 'purple',
         Martlock: 'blue'
       },
-      period: '1',
+      period: 1,
       page: 1,
       perPage: 9,
       pageCount: 0,
@@ -208,8 +187,11 @@ export default {
       if (this.selected.length <= 0) {
         return
       }
-      pricesByIds(this.selected, parseInt(this.period)).then(processedItems => {
+      this.loading = true
+      pricesByIds(this.selected, this.period).then(processedItems => {
         this.results = processedItems
+        this.pageCount = 0
+        this.loading = false
       })
     },
     getBestPrices () {

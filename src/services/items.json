@@ -5010,46 +5010,6 @@
     "name": "Elder's Relic"
   },
   {
-    "id": "T1_TRASH",
-    "nome": "Lixo",
-    "name": "Trash"
-  },
-  {
-    "id": "T2_TRASH",
-    "nome": "Lixo",
-    "name": "Trash"
-  },
-  {
-    "id": "T3_TRASH",
-    "nome": "Lixo",
-    "name": "Trash"
-  },
-  {
-    "id": "T4_TRASH",
-    "nome": "Lixo",
-    "name": "Trash"
-  },
-  {
-    "id": "T5_TRASH",
-    "nome": "Lixo",
-    "name": "Trash"
-  },
-  {
-    "id": "T6_TRASH",
-    "nome": "Lixo",
-    "name": "Trash"
-  },
-  {
-    "id": "T7_TRASH",
-    "nome": "Lixo",
-    "name": "Trash"
-  },
-  {
-    "id": "T8_TRASH",
-    "nome": "Lixo",
-    "name": "Trash"
-  },
-  {
     "id": "T1_OFF_SHIELD",
     "nome": "Escudo do Calouro",
     "name": "Beginner's Shield"

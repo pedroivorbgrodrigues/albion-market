@@ -3,8 +3,8 @@ import localItems from './items.json'
 
 const api = 'https://www.albion-online-data.com/api/v1/stats/prices'
 
-const { differenceInDays } = require('date-fns')
-const allowedCities = ['Black Market', 'Caerleon', 'Bridgewatch', 'Fort Sterling', 'Lymhurst', 'Thetford', 'Martlock']
+const { differenceInCalendarDays } = require('date-fns')
+const allowedCities = ['Caerleon', 'Bridgewatch', 'Fort Sterling', 'Lymhurst', 'Thetford', 'Martlock']
 
 const getItems = () => {
   return localItems
@@ -14,7 +14,7 @@ const groupCitiesByItemId = (period, prices, current) => {
   if (!prices[current.item_id]) {
     prices[current.item_id] = { id: current.item_id, cities: [] }
   }
-  const diff = differenceInDays(new Date(), new Date(current.sell_price_min_date))
+  const diff = differenceInCalendarDays(new Date(), new Date(current.sell_price_min_date))
   if (allowedCities.includes(current.city) && diff <= period) {
     prices[current.item_id].cities.push({
       name: current.city,
@@ -25,20 +25,30 @@ const groupCitiesByItemId = (period, prices, current) => {
   return prices
 }
 
-const rentabilityOutlier = 400
-const profitOutlier = 200000
+const isOutlier = (minPrice, rentability) => {
+  if (minPrice <= 1000) {
+    return rentability > 3000
+  }
+  if (minPrice <= 10000) {
+    return rentability > 2000
+  }
+  if (minPrice <= 50000) {
+    return rentability > 1000
+  }
+  return rentability > 400
+}
+
 const calculateTravels = (travels, city, index, sorted) => {
   if (index > 0) {
     let rentability = (city.price / sorted[0].price - 1) * 100
-    const profit = city.price - sorted[0].price
-    if (rentability > rentabilityOutlier && profit > profitOutlier) {
+    if (isOutlier(sorted[0].price, rentability)) {
       rentability = 0
     }
     travels.push({
       from: sorted[0].name,
       to: city.name,
-      rentability: rentability.toFixed(2),
-      profit: profit
+      rentability: Math.floor(rentability),
+      profit: city.price - sorted[0].price
     })
   }
   return travels
@@ -95,7 +105,7 @@ const findBestPrices = async (period) => {
   const now = new Date()
   if (cachedJSON != null) {
     const cached = JSON.parse(cachedJSON)
-    const diff = differenceInDays(now, new Date(cached.date))
+    const diff = differenceInCalendarDays(now, new Date(cached.date))
     if (diff <= period && cached.items.length > 0) {
       return cached.items
     }

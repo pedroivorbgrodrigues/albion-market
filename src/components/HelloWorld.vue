@@ -13,7 +13,7 @@
           chips
           color="blue-grey lighten-2"
           label="Select"
-          item-text="name"
+          item-text="nome"
           item-value="id"
           multiple
         >
@@ -28,7 +28,7 @@
               <v-avatar left>
                 <v-img :src="icon(data.item.id)"></v-img>
               </v-avatar>
-              {{ data.item.name }}
+              {{ data.item.nome }}
             </v-chip>
           </template>
           <template v-slot:item="data">
@@ -40,7 +40,7 @@
                 <img :src="icon(data.item.id)" />
               </v-list-item-avatar>
               <v-list-item-content>
-                <v-list-item-title v-html="data.item.name"></v-list-item-title>
+                <v-list-item-title v-html="data.item.nome"></v-list-item-title>
               </v-list-item-content>
             </template>
           </template>
@@ -64,7 +64,7 @@
                 <v-img :src="icon(item.id)"></v-img>
               </v-list-item-avatar>
               <v-list-item-content>
-                <v-list-item-title class="headline mb-2" v-text="item.name"></v-list-item-title>
+                <v-list-item-title class="headline mb-2" v-text="item.nome"></v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list>

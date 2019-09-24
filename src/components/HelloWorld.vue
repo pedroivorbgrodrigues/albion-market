@@ -3,6 +3,13 @@
     <v-overlay :value="loading">
       <v-progress-circular :size="128" indeterminate></v-progress-circular>
     </v-overlay>
+    <v-banner single-line elevation="2">
+      Quer preços mais atualizados? Rode o programa enquanto acessa as AH's
+      <template v-slot:actions>
+        <v-btn text @click="clearCache">Limpar cache</v-btn>
+        <v-btn text color="deep-purple accent-4" href="https://github.com/BroderickHyman/albiondata-client/releases" target="_blank">Baixar</v-btn>
+      </template>
+    </v-banner>
     <v-row>
       <v-col cols="12">
         <v-autocomplete
@@ -12,7 +19,7 @@
           filled
           chips
           color="blue-grey lighten-2"
-          label="Select"
+          label="Selecionar"
           item-text="nome"
           item-value="id"
           multiple
@@ -49,10 +56,10 @@
     </v-row>
     <v-row>
       <v-col cols="12" v-if="selected.length > 0">
-        <v-btn block min-height="68" @click="getPrices" dark>Get travels for selected</v-btn>
+        <v-btn block min-height="68" @click="getPrices" dark>Obter viagens para os selecionados</v-btn>
       </v-col>
       <v-col cols="12" v-if="selected.length == 0">
-        <v-btn block min-height="68" color="primary" @click="getBestPrices" dark>Get best travels</v-btn>
+        <v-btn block min-height="68" color="primary" @click="getBestPrices" dark>Obter melhores viagens</v-btn>
       </v-col>
     </v-row>
     <v-row>
@@ -75,15 +82,10 @@
         <v-checkbox v-model="categories" label="Mounts" value="MOUNTS"></v-checkbox>
       </v-col>
       <v-col>
-        <v-select
-          v-model="selectedTier"
-          :items="tiers"
-          label="Tier"
-          solo
-        ></v-select>
+        <v-select v-model="selectedTier" :items="tiers" label="Tier" solo></v-select>
       </v-col>
       <v-col>
-        <v-btn block min-height="48" @click="applyFilter" dark>Apply filters</v-btn>
+        <v-btn block min-height="48" @click="applyFilter" dark>Aplicar filtros</v-btn>
       </v-col>
     </v-row>
     <v-row>
@@ -101,7 +103,7 @@
           </v-list>
           <v-list-group value="true">
             <template v-slot:activator>
-              <v-list-item-title>Travels</v-list-item-title>
+              <v-list-item-title>Viagens</v-list-item-title>
             </template>
             <div v-for="(travel, index) in item.travels" :key="index">
               <v-list-item v-if="travel.rentability > 0" :style="gradient(travel.from, travel.to)">
@@ -120,7 +122,7 @@
           </v-list-group>
           <v-list-group>
             <template v-slot:activator>
-              <v-list-item-title>Prices</v-list-item-title>
+              <v-list-item-title>Preços</v-list-item-title>
             </template>
             <div v-for="city in item.cities" :key="city.name">
               <v-list-item :style="`background-color: ${cityColor(city.name)}`">
@@ -146,7 +148,12 @@
 <script>
 import { format } from 'date-fns'
 
-import { pricesByIds, getItems, applyFilters, filteredByPage } from '../services/api'
+import {
+  pricesByIds,
+  getItems,
+  applyFilters,
+  filteredByPage
+} from '../services/api'
 
 const baseImageUrl =
   'https://albiononline2d.ams3.cdn.digitaloceanspaces.com/thumbnails/128'
@@ -230,7 +237,12 @@ export default {
     },
     getBestPrices () {
       this.loading = true
-      filteredByPage(this.categories, this.selectedTier, this.period, this.page).then(result => {
+      filteredByPage(
+        this.categories,
+        this.selectedTier,
+        this.period,
+        this.page
+      ).then(result => {
         this.pageCount = result.pageCount
         this.results = result.pageItems
         this.loading = false
@@ -238,7 +250,13 @@ export default {
     },
     applyFilter () {
       this.loading = true
-      applyFilters(this.period, this.categories, this.selectedTier).then(this.getBestPrices)
+      applyFilters(this.period, this.categories, this.selectedTier).then(
+        this.getBestPrices
+      )
+    },
+    clearCache () {
+      localStorage.clear()
+      this.results = []
     }
   }
 }

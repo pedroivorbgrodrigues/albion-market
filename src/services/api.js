@@ -143,6 +143,8 @@ const filteredKey = 'filtered'
 const applyFilters = async (period, categories, selectedTier) => {
   const prices = await findBestPrices(period)
   if (categories.length <= 0 && selectedTier === 'ANY') {
+    const cache = { date: new Date(), items: prices }
+    localStorage.setItem(filteredKey, JSON.stringify(cache))
     return prices
   }
   let filtered = prices

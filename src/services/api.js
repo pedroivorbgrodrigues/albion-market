@@ -116,12 +116,67 @@ const findBestPrices = async (period) => {
   return sortedResult
 }
 
-const getBestPricesByPage = async (period, page = 1, perPage = 9) => {
+const getCategoriesKeywords = categories => {
+  let keywords = []
+  if (categories.includes('ARMOR')) {
+    keywords.push('_ARMOR_', '_SHOES_', '_HEAD_', '_CAPE', '_BAG')
+  }
+  if (categories.includes('WEAPON')) {
+    keywords.push('_2H_', '_MAIN_', '_OFF_')
+  }
+  if (categories.includes('CONSUMABLE')) {
+    keywords.push('_MEAL', '_POTION')
+  }
+  if (categories.includes('RESOURCES')) {
+    keywords.push('_ROCK_', '_WOOD_', '_FIBER_', '_ORE_', '_HIDE_', '_STONEBLOCK_', '_PLANKS_', '_METALBAR_', '_LEATHER_', '_CLOTH_')
+  }
+  if (categories.includes('FARM')) {
+    keywords.push('_FARM_')
+  }
+  if (categories.includes('MOUNTS')) {
+    keywords.push('_MOUNT_')
+  }
+  return keywords
+}
+
+const filteredKey = 'filtered'
+const applyFilters = async (period, categories, selectedTier) => {
   const prices = await findBestPrices(period)
+  if (categories.length <= 0 && selectedTier === 'ANY') {
+    return prices
+  }
+  let filtered = prices
+  if (selectedTier !== 'ANY') {
+    filtered = filtered.filter(item => item.id.startsWith(selectedTier))
+  }
+  if (categories.length > 0) {
+    const keywords = getCategoriesKeywords(categories)
+    filtered = filtered.filter(item => keywords.some(kw => item.id.includes(kw)))
+  }
+
+  const cache = { date: new Date(), items: filtered }
+  localStorage.setItem(filteredKey, JSON.stringify(cache))
+  return filtered
+}
+
+const getFiltered = async (period, categories, selectedTier) => {
+  const cachedJSON = localStorage.getItem(filteredKey)
+  if (cachedJSON != null) {
+    const cached = JSON.parse(cachedJSON)
+    if (cached.items.length > 0) {
+      return cached.items
+    }
+  }
+  const filtered = await applyFilters(period, categories, selectedTier)
+  return filtered
+}
+
+const filteredByPage = async (categories, selectedTier, period, page = 1, perPage = 9) => {
+  const prices = await getFiltered(period, categories, selectedTier)
   const pageIndex = (page - 1) * perPage
   const pageItems = prices.slice(pageIndex, pageIndex + perPage)
   const pageCount = Math.floor(prices.length / perPage)
   return { pageItems, pageCount }
 }
 
-export { pricesByIds, getItems, getBestPricesByPage }
+export { pricesByIds, getItems, applyFilters, filteredByPage }

@@ -1,25 +1,31 @@
 import axios from 'axios'
 import localItems from './items.json'
 
-const api = 'https://www.albion-online-data.com/api/v1/stats/prices'
+const api = 'https://www.albion-online-data.com/api'
 
 const { differenceInCalendarDays } = require('date-fns')
-const allowedCities = ['Caerleon', 'Bridgewatch', 'Fort Sterling', 'Lymhurst', 'Thetford', 'Martlock']
+const allowedCities = ['Black Market', 'Caerleon', 'Bridgewatch', 'Fort Sterling', 'Lymhurst', 'Thetford', 'Martlock']
 
 const getItems = () => {
   return localItems
 }
 
-const groupCitiesByItemId = (period, prices, current) => {
-  if (!prices[current.item_id]) {
-    prices[current.item_id] = { id: current.item_id, cities: [] }
+const groupCitiesByItemId = (period, useQuality, prices, current) => {
+  const idQuality = useQuality ? `${current.item_id}-${current.quality}` : current.item_id
+  if (!prices[idQuality]) {
+    prices[idQuality] = { id: current.item_id, cities: [] }
+    if (useQuality) {
+      prices[idQuality].idQuality = idQuality
+      prices[idQuality].quality = current.quality
+    }
   }
   const diff = differenceInCalendarDays(new Date(), new Date(current.sell_price_min_date))
   if (allowedCities.includes(current.city) && diff <= period) {
-    prices[current.item_id].cities.push({
+    const isBlackMarket = current.city === 'Black Market'
+    prices[idQuality].cities.push({
       name: current.city,
-      price: current.sell_price_min,
-      date: current.sell_price_min_date
+      price: isBlackMarket ? current.buy_price_min : current.sell_price_min,
+      date: isBlackMarket ? current.buy_price_min_date : current.sell_price_min_date
     })
   }
   return prices
@@ -41,28 +47,32 @@ const isOutlier = (minPrice, rentability) => {
 const calculateTravels = (travels, city, index, sorted) => {
   if (index > 0) {
     let rentability = (city.price / sorted[0].price - 1) * 100
+    let profit = city.price - sorted[0].price
     if (isOutlier(sorted[0].price, rentability)) {
       rentability = 0
+      profit = 0
     }
     travels.push({
       from: sorted[0].name,
       to: city.name,
       rentability: Math.floor(rentability),
-      profit: city.price - sorted[0].price
+      profit: profit
     })
   }
   return travels
 }
-
-const processResult = (results) => {
+const qualityEnum = ['Normal', 'Bom', 'Excepcional', 'Excelente', 'Obra Prima']
+const processResult = (results, useQuality) => {
   const items = getItems()
-  const processedItems = Object.values(results).filter(item => item.cities.length >= 2)
+  const processedItems = results.filter(item => item.cities.length >= 2)
     .map(item => {
-      const sorted = item.cities.sort((a, b) => a.price - b.price)
-      const travels = sorted.reduce(calculateTravels, [])
+      const travels = item.cities.reduce(calculateTravels, [])
       const sortedTravels = travels.sort((a, b) => b.rentability - a.rentability)
-      const name = items.find(i => i.id === item.id).name
-      return { ...item, travels: sortedTravels, name }
+      let nome = items.find(i => i.id === item.id).nome
+      if (useQuality) {
+        nome += ` [${qualityEnum[item.quality]}]`
+      }
+      return { ...item, travels: sortedTravels, nome }
     })
   return processedItems
 }
@@ -71,18 +81,27 @@ const sortByTravels = (items) => {
   return items.sort((a, b) => b.travels[0].rentability - a.travels[0].rentability)
 }
 
-const pricesByIds = async (ids, period, sorted = true) => {
+const pricesByIds = async (ids, period, sorted = true, useQuality = false) => {
   try {
-    const response = await axios.get(`${api}/${ids.join(',')}`)
-    const groupedItems = response.data.reduce(groupCitiesByItemId.bind(this, period), {})
-    const processedItems = processResult(groupedItems)
+    const version = useQuality ? 'v2' : 'v1'
+    const response = await axios.get(`${api}/${version}/stats/prices/${ids.join(',')}`)
+    const groupedItems = response.data.reduce(groupCitiesByItemId.bind(this, period, useQuality), {})
+    const cleanItems = Object.values(groupedItems).map(item => {
+      const sorted = item.cities.sort((a, b) => a.price - b.price)
+      if (sorted.length > 0 && sorted[0].name === 'Black Market') {
+        sorted.splice(0, 1)
+      }
+      return { ...item, cities: sorted }
+    })
+    const processedItems = processResult(cleanItems, useQuality)
     return sorted ? sortByTravels(processedItems) : processedItems
   } catch (error) {
+    console.log(error.toString())
     return []
   }
 }
 
-const processAllPrices = async (period) => {
+const processAllPrices = async (period, useQuality) => {
   let index = 0
   const batchSize = 100
   const batches = []
@@ -92,15 +111,17 @@ const processAllPrices = async (period) => {
     batches.push(batch.map(item => item.id))
     index += batchSize
   }
-  const promises = batches.map(batchIds => pricesByIds(batchIds, period, false))
+  const promises = batches.map(batchIds => pricesByIds(batchIds, period, false, useQuality))
   const results = await Promise.all(promises)
   const mergedResults = Array.prototype.concat.apply([], results)
   const sortedResult = sortByTravels(mergedResults)
   return sortedResult
 }
 
-const storageKey = 'findBestPrices'
-const findBestPrices = async (period) => {
+const findKey = 'findBestPrices'
+const findBestPrices = async (period, useQuality) => {
+  const qualityKey = useQuality ? '-qual' : ''
+  const storageKey = `${findKey}${qualityKey}`
   const cachedJSON = localStorage.getItem(storageKey)
   const now = new Date()
   if (cachedJSON != null) {
@@ -110,7 +131,7 @@ const findBestPrices = async (period) => {
       return cached.items
     }
   }
-  const sortedResult = await processAllPrices(period)
+  const sortedResult = await processAllPrices(period, useQuality)
   const cache = { date: now, items: sortedResult }
   localStorage.setItem(storageKey, JSON.stringify(cache))
   return sortedResult
@@ -139,12 +160,9 @@ const getCategoriesKeywords = categories => {
   return keywords
 }
 
-const filteredKey = 'filtered'
-const applyFilters = async (period, categories, selectedTier) => {
-  const prices = await findBestPrices(period)
+const applyFilters = async (period, categories, selectedTier, useQuality) => {
+  const prices = await findBestPrices(period, useQuality)
   if (categories.length <= 0 && selectedTier === 'ANY') {
-    const cache = { date: new Date(), items: prices }
-    localStorage.setItem(filteredKey, JSON.stringify(cache))
     return prices
   }
   let filtered = prices
@@ -155,26 +173,11 @@ const applyFilters = async (period, categories, selectedTier) => {
     const keywords = getCategoriesKeywords(categories)
     filtered = filtered.filter(item => keywords.some(kw => item.id.includes(kw)))
   }
-
-  const cache = { date: new Date(), items: filtered }
-  localStorage.setItem(filteredKey, JSON.stringify(cache))
   return filtered
 }
 
-const getFiltered = async (period, categories, selectedTier) => {
-  const cachedJSON = localStorage.getItem(filteredKey)
-  if (cachedJSON != null) {
-    const cached = JSON.parse(cachedJSON)
-    if (cached.items.length > 0) {
-      return cached.items
-    }
-  }
-  const filtered = await applyFilters(period, categories, selectedTier)
-  return filtered
-}
-
-const filteredByPage = async (categories, selectedTier, period, page = 1, perPage = 9) => {
-  const prices = await getFiltered(period, categories, selectedTier)
+const filteredByPage = async (categories, selectedTier, period, useQuality, page = 1, perPage = 9) => {
+  const prices = await applyFilters(period, categories, selectedTier, useQuality)
   const pageIndex = (page - 1) * perPage
   const pageItems = prices.slice(pageIndex, pageIndex + perPage)
   const pageCount = Math.floor(prices.length / perPage)

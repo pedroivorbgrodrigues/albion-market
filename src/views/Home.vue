@@ -7,7 +7,12 @@
       Quer preços mais atualizados? Rode o programa enquanto acessa as AH's
       <template v-slot:actions>
         <v-btn text @click="clearCache">Limpar cache</v-btn>
-        <v-btn text color="deep-purple accent-4" href="https://github.com/BroderickHyman/albiondata-client/releases" target="_blank">Baixar</v-btn>
+        <v-btn
+          text
+          color="deep-purple accent-4"
+          href="https://github.com/BroderickHyman/albiondata-client/releases"
+          target="_blank"
+        >Baixar</v-btn>
       </template>
     </v-banner>
     <v-row>
@@ -59,7 +64,13 @@
         <v-btn block min-height="68" @click="getPrices" dark>Obter viagens para os selecionados</v-btn>
       </v-col>
       <v-col cols="12" v-if="selected.length == 0">
-        <v-btn block min-height="68" color="primary" @click="getBestPrices" dark>Obter melhores viagens</v-btn>
+        <v-btn
+          block
+          min-height="68"
+          color="primary"
+          @click="getBestPrices"
+          dark
+        >Obter melhores viagens</v-btn>
       </v-col>
     </v-row>
     <v-row>
@@ -76,10 +87,13 @@
         <v-checkbox v-model="categories" label="Resources" value="RESOURCES"></v-checkbox>
       </v-col>
       <v-col>
-        <v-checkbox v-model="categories" label="Farm items" value="FARM"></v-checkbox>
+        <v-checkbox v-model="categories" label="Farm" value="FARM"></v-checkbox>
       </v-col>
       <v-col>
         <v-checkbox v-model="categories" label="Mounts" value="MOUNTS"></v-checkbox>
+      </v-col>
+      <v-col>
+        <v-switch v-model="useQuality" label="Usar qualidade"></v-switch>
       </v-col>
       <v-col>
         <v-select v-model="selectedTier" :items="tiers" label="Tier" solo></v-select>
@@ -89,7 +103,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" md="4" v-for="item in results" :key="item.id">
+      <v-col cols="12" md="4" v-for="item in results" :key="useQuality ? item.idQuality : item.id">
         <v-card :color="item.color">
           <v-list>
             <v-list-item>
@@ -185,6 +199,7 @@ export default {
       loading: false,
       tiers: ['ANY', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8'],
       selectedTier: 'ANY',
+      useQuality: false,
       categories: []
     }
   },
@@ -237,26 +252,23 @@ export default {
     },
     getBestPrices () {
       this.loading = true
-      filteredByPage(
-        this.categories,
-        this.selectedTier,
-        this.period,
-        this.page
-      ).then(result => {
-        this.pageCount = result.pageCount
-        this.results = result.pageItems
-        this.loading = false
-      })
+      filteredByPage(this.categories, this.selectedTier, this.period, this.useQuality, this.page)
+        .then(result => {
+          this.pageCount = result.pageCount
+          this.results = result.pageItems
+          this.loading = false
+        })
     },
     applyFilter () {
       this.loading = true
-      applyFilters(this.period, this.categories, this.selectedTier).then(
+      applyFilters(this.period, this.categories, this.selectedTier, this.useQuality).then(
         this.getBestPrices
       )
     },
     clearCache () {
       localStorage.clear()
       this.results = []
+      this.pageCount = 0
     }
   }
 }

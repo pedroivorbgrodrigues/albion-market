@@ -107,12 +107,12 @@
         <v-card :color="item.color">
           <v-list>
             <v-list-item two-line>
-              <v-list-item-avatar size="64" tile :class="qualityClass(item)">
+              <v-list-item-avatar size="64" tile>
                 <v-img :src="icon(item.id)"></v-img>
               </v-list-item-avatar>
               <v-list-item-content>
-                <v-list-item-title class="headline mb-2 wrap" v-text="item.nome"></v-list-item-title>
-                <v-list-item-subtitle v-if="useQuality" v-text="item.qualityName"></v-list-item-subtitle>
+                <v-list-item-title class="headline mb-2 wrap" :class="qualityClass(item)" v-text="item.nome"></v-list-item-title>
+                <v-list-item-subtitle v-if="useQuality" v-text="item.qualityName" class="subtitle-2" :class="qualityClass(item)"></v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-list>
@@ -165,19 +165,19 @@
   white-space: pre-wrap;
 }
 .qual0 {
-  box-shadow: 0px 7px 8px -4px rgba(131, 134, 132, 0.2), 0px 12px 17px 2px rgba(131, 134, 132, 0.14), 0px 5px 22px 4px rgba(131, 134, 132, 0.12) !important
+  color: rgb(131, 134, 132)!important;
 }
 .qual1 {
-  box-shadow: 0px 7px 8px -4px rgba(169, 180, 204, 0.2), 0px 12px 17px 2px rgba(169, 180, 204, 0.14), 0px 5px 22px 4px rgba(169, 180, 204, 0.12) !important
+  color: rgb(106, 143, 181)!important;
 }
 .qual2 {
-  box-shadow: 0px 7px 8px -4px rgba(188, 146, 101, 0.2), 0px 12px 17px 2px rgba(188, 146, 101, 0.14), 0px 5px 22px 4px rgba(188, 146, 101, 0.12) !important
+  color: rgb(188, 146, 101)!important;
 }
 .qual3 {
-  box-shadow: 0px 7px 8px -4px rgba(212, 211, 209, 0.2), 0px 12px 17px 2px rgba(212, 211, 209, 0.14), 0px 5px 22px 4px rgba(212, 211, 209, 0.12) !important
+  color: rgb(169, 180, 204)!important;
 }
 .qual4 {
-  box-shadow: 0px 7px 8px -4px rgba(255, 170, 44, 0.2), 0px 12px 17px 2px rgba(255, 170, 44, 0.14), 0px 5px 22px 4px rgba(255, 170, 44, 0.12) !important
+  color: rgb(255, 170, 44)!important;
 }
 </style>
 <script>

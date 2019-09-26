@@ -60,46 +60,40 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" v-if="selected.length > 0">
-        <v-btn block min-height="68" @click="getPrices" dark>Obter viagens para os selecionados</v-btn>
+      <v-col cols="10" v-if="selected.length > 0">
+        <v-btn block @click="getPrices" dark>Obter viagens para os selecionados</v-btn>
       </v-col>
-      <v-col cols="12" v-if="selected.length == 0">
-        <v-btn
-          block
-          min-height="68"
-          color="primary"
-          @click="getBestPrices"
-          dark
-        >Obter melhores viagens</v-btn>
+      <v-col cols="10" v-if="selected.length == 0">
+        <v-btn block color="primary" @click="getBestPrices" dark>Obter melhores viagens</v-btn>
+      </v-col>
+      <v-col>
+        <v-checkbox v-model="useQuality" label="Usar qualidade"></v-checkbox>
       </v-col>
     </v-row>
     <v-row>
       <v-col>
-        <v-checkbox v-model="categories" label="Armor" value="ARMOR"></v-checkbox>
+        <v-select
+          v-model="categories"
+          :items="availableCategories"
+          filled
+          chips
+          label="Filters"
+          multiple
+        ></v-select>
       </v-col>
       <v-col>
-        <v-checkbox v-model="categories" label="Weapon" value="WEAPON"></v-checkbox>
+        <v-select filled height="68" v-model="selectedTier" :items="tiers" label="Tier"></v-select>
       </v-col>
       <v-col>
-        <v-checkbox v-model="categories" label="Consumable" value="CONSUMABLE"></v-checkbox>
+        <v-select filled height="68" v-model="fromCity" item :items="getFromCities()" label="From"></v-select>
       </v-col>
       <v-col>
-        <v-checkbox v-model="categories" label="Resources" value="RESOURCES"></v-checkbox>
+        <v-select filled height="68" v-model="toCity" :items="getToCities()" label="To"></v-select>
       </v-col>
-      <v-col>
-        <v-checkbox v-model="categories" label="Farm" value="FARM"></v-checkbox>
-      </v-col>
-      <v-col>
-        <v-checkbox v-model="categories" label="Mounts" value="MOUNTS"></v-checkbox>
-      </v-col>
-      <v-col>
-        <v-switch v-model="useQuality" label="Usar qualidade"></v-switch>
-      </v-col>
-      <v-col>
-        <v-select v-model="selectedTier" :items="tiers" label="Tier" solo></v-select>
-      </v-col>
-      <v-col>
-        <v-btn block min-height="48" @click="applyFilter" dark>Aplicar filtros</v-btn>
+    </v-row>
+    <v-row>
+      <v-col cols="12">
+        <v-btn block @click="applyFilter" dark>Aplicar filtros</v-btn>
       </v-col>
     </v-row>
     <v-row>
@@ -111,8 +105,17 @@
                 <v-img :src="icon(item.id)"></v-img>
               </v-list-item-avatar>
               <v-list-item-content>
-                <v-list-item-title class="headline mb-2 wrap" :class="qualityClass(item)" v-text="item.nome"></v-list-item-title>
-                <v-list-item-subtitle v-if="useQuality" v-text="item.qualityName" class="subtitle-2" :class="qualityClass(item)"></v-list-item-subtitle>
+                <v-list-item-title
+                  class="headline mb-2 wrap"
+                  :class="qualityClass(item)"
+                  v-text="item.nome"
+                ></v-list-item-title>
+                <v-list-item-subtitle
+                  v-if="useQuality"
+                  v-text="item.qualityName"
+                  class="subtitle-2"
+                  :class="qualityClass(item)"
+                ></v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-list>
@@ -165,19 +168,19 @@
   white-space: pre-wrap;
 }
 .qual0 {
-  color: rgb(131, 134, 132)!important;
+  color: rgb(131, 134, 132) !important;
 }
 .qual1 {
-  color: rgb(106, 143, 181)!important;
+  color: rgb(106, 143, 181) !important;
 }
 .qual2 {
-  color: rgb(188, 146, 101)!important;
+  color: rgb(188, 146, 101) !important;
 }
 .qual3 {
-  color: rgb(169, 180, 204)!important;
+  color: rgb(169, 180, 204) !important;
 }
 .qual4 {
-  color: rgb(255, 170, 44)!important;
+  color: rgb(255, 170, 44) !important;
 }
 </style>
 <script>
@@ -213,6 +216,14 @@ export default {
         Thetford: 'purple',
         Martlock: 'blue'
       },
+      availableCategories: [
+        'ARMOR',
+        'WEAPON',
+        'CONSUMABLE',
+        'RESOURCES',
+        'FARM',
+        'MOUNTS'
+      ],
       period: 1,
       page: 1,
       perPage: 9,
@@ -221,7 +232,9 @@ export default {
       tiers: ['ANY', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8'],
       selectedTier: 'ANY',
       useQuality: false,
-      categories: []
+      categories: [],
+      fromCity: 'ANY',
+      toCity: 'ANY'
     }
   },
   watch: {
@@ -241,6 +254,18 @@ export default {
     qualityClass (item) {
       const quality = item.quality || 0
       return `qual${quality}`
+    },
+    getFromCities () {
+      if (this.toCity === 'ANY') {
+        return Object.keys(this.cityColors)
+      }
+      return Object.keys(this.cityColors).filter(key => key !== this.toCity)
+    },
+    getToCities () {
+      if (this.fromCity === 'ANY') {
+        return Object.keys(this.cityColors)
+      }
+      return Object.keys(this.cityColors).filter(key => key !== this.fromCity)
     },
     gradient (from, to) {
       const fromColor = this.cityColor(from)
@@ -277,18 +302,26 @@ export default {
     },
     getBestPrices () {
       this.loading = true
-      filteredByPage(this.categories, this.selectedTier, this.period, this.useQuality, this.page)
-        .then(result => {
-          this.pageCount = result.pageCount
-          this.results = result.pageItems
-          this.loading = false
-        })
+      filteredByPage(
+        this.categories,
+        this.selectedTier,
+        this.period,
+        this.useQuality,
+        this.page
+      ).then(result => {
+        this.pageCount = result.pageCount
+        this.results = result.pageItems
+        this.loading = false
+      })
     },
     applyFilter () {
       this.loading = true
-      applyFilters(this.period, this.categories, this.selectedTier, this.useQuality).then(
-        this.getBestPrices
-      )
+      applyFilters(
+        this.period,
+        this.categories,
+        this.selectedTier,
+        this.useQuality
+      ).then(this.getBestPrices)
     },
     clearCache () {
       localStorage.clear()

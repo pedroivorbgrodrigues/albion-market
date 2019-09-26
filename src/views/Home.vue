@@ -106,12 +106,13 @@
       <v-col cols="12" md="4" v-for="item in results" :key="useQuality ? item.idQuality : item.id">
         <v-card :color="item.color">
           <v-list>
-            <v-list-item>
-              <v-list-item-avatar size="64" tile>
+            <v-list-item two-line>
+              <v-list-item-avatar size="64" tile :class="qualityClass(item)">
                 <v-img :src="icon(item.id)"></v-img>
               </v-list-item-avatar>
               <v-list-item-content>
-                <v-list-item-title class="headline mb-2" v-text="item.nome"></v-list-item-title>
+                <v-list-item-title class="headline mb-2 wrap" v-text="item.nome"></v-list-item-title>
+                <v-list-item-subtitle v-if="useQuality" v-text="item.qualityName"></v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-list>
@@ -159,6 +160,26 @@
     </v-row>
   </v-container>
 </template>
+<style scoped>
+.wrap {
+  white-space: pre-wrap;
+}
+.qual0 {
+  box-shadow: 0px 7px 8px -4px rgba(131, 134, 132, 0.2), 0px 12px 17px 2px rgba(131, 134, 132, 0.14), 0px 5px 22px 4px rgba(131, 134, 132, 0.12) !important
+}
+.qual1 {
+  box-shadow: 0px 7px 8px -4px rgba(169, 180, 204, 0.2), 0px 12px 17px 2px rgba(169, 180, 204, 0.14), 0px 5px 22px 4px rgba(169, 180, 204, 0.12) !important
+}
+.qual2 {
+  box-shadow: 0px 7px 8px -4px rgba(188, 146, 101, 0.2), 0px 12px 17px 2px rgba(188, 146, 101, 0.14), 0px 5px 22px 4px rgba(188, 146, 101, 0.12) !important
+}
+.qual3 {
+  box-shadow: 0px 7px 8px -4px rgba(212, 211, 209, 0.2), 0px 12px 17px 2px rgba(212, 211, 209, 0.14), 0px 5px 22px 4px rgba(212, 211, 209, 0.12) !important
+}
+.qual4 {
+  box-shadow: 0px 7px 8px -4px rgba(255, 170, 44, 0.2), 0px 12px 17px 2px rgba(255, 170, 44, 0.14), 0px 5px 22px 4px rgba(255, 170, 44, 0.12) !important
+}
+</style>
 <script>
 import { format } from 'date-fns'
 
@@ -216,6 +237,10 @@ export default {
   methods: {
     icon (id) {
       return `${baseImageUrl}/${id}`
+    },
+    qualityClass (item) {
+      const quality = item.quality || 0
+      return `qual${quality}`
     },
     gradient (from, to) {
       const fromColor = this.cityColor(from)

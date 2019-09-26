@@ -68,11 +68,12 @@ const processResult = (results, useQuality) => {
     .map(item => {
       const travels = item.cities.reduce(calculateTravels, [])
       const sortedTravels = travels.sort((a, b) => b.rentability - a.rentability)
-      let nome = items.find(i => i.id === item.id).nome
+      const nome = items.find(i => i.id === item.id).nome
+      const processedItem = { ...item, travels: sortedTravels, nome }
       if (useQuality) {
-        nome += ` [${qualityEnum[item.quality]}]`
+        processedItem.qualityName = qualityEnum[item.quality]
       }
-      return { ...item, travels: sortedTravels, nome }
+      return processedItem
     })
   return processedItems
 }

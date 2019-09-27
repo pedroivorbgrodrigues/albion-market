@@ -234,6 +234,7 @@ export default {
         Martlock: 'blue'
       },
       availableCategories: [
+        'ZVZ',
         'ARMADURA',
         'ARMA',
         'CONSUMIVEL',

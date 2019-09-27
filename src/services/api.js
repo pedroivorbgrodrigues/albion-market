@@ -156,8 +156,13 @@ const findBestPrices = async (filters) => {
   return sortedResult
 }
 
+const tank = ['MACE_MORGANA', '2H_FLAIL', '2H_TWINSCYTHE_HELL', '2H_RAM_KEEPER', 'HEAD_PLATE_SET1', 'HEAD_PLATE_SET2', 'HEAD_LEATHER_HELL', 'ARMOR_PLATE_KEEPER', 'ARMOR_PLATE_SET3', 'SHOES_CLOTH_SET3', 'CAPEITEM_FW_MARTLOCK']
+
 const getCategoriesKeywords = categories => {
   let keywords = []
+  if (categories.includes('ZVZ')) {
+    keywords.push(...tank)
+  }
   if (categories.includes('ARMADURA')) {
     keywords.push('_ARMOR_', '_SHOES_', '_HEAD_', '_CAPE', '_BAG')
   }

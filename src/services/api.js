@@ -37,12 +37,12 @@ const isOutlier = (minPrice, rentability) => {
     return rentability > 3000
   }
   if (minPrice <= 10000) {
-    return rentability > 2000
+    return rentability > 700
   }
   if (minPrice <= 50000) {
-    return rentability > 1000
+    return rentability > 400
   }
-  return rentability > 400
+  return rentability > 200
 }
 
 const calculateTravels = (cities, fromCity, toCity) => {
@@ -93,7 +93,10 @@ const processResult = (results, useQuality, fromCity, toCity) => {
   return processedItems
 }
 
-const sortByTravels = (items) => {
+const sortByTravels = (items, sortBy) => {
+  if (sortBy === 'profit') {
+    return items.sort((a, b) => b.travels[0].profit - a.travels[0].profit)
+  }
   return items.sort((a, b) => b.travels[0].rentability - a.travels[0].rentability)
 }
 
@@ -110,7 +113,7 @@ const pricesByIds = async (ids, filters) => {
       return { ...item, cities: sorted }
     })
     const processedItems = processResult(cleanItems, filters.useQuality, filters.fromCity, filters.toCity)
-    return filters.sorted ? sortByTravels(processedItems) : processedItems
+    return filters.sorted ? sortByTravels(processedItems, filters.sortBy) : processedItems
   } catch (error) {
     console.log(error.toString())
     return []
@@ -131,7 +134,7 @@ const processAllPrices = async (filters) => {
   const results = await Promise.all(promises)
   const mergedResults = Array.prototype.concat.apply([], results)
   const cleanResults = mergedResults.filter(entry => entry.travels.length > 0)
-  const sortedResult = sortByTravels(cleanResults)
+  const sortedResult = sortByTravels(cleanResults, filters.sortBy)
   return sortedResult
 }
 
@@ -177,8 +180,8 @@ const getCategoriesKeywords = categories => {
 }
 
 const applyFilters = async (filters) => {
-  const { period, categories, selectedTier, useQuality, fromCity, toCity } = filters
-  const prices = await findBestPrices({ period, useQuality, fromCity, toCity })
+  const { categories, selectedTier } = filters
+  const prices = await findBestPrices(filters)
   if (categories.length <= 0 && selectedTier === 'QUALQUER') {
     return prices
   }

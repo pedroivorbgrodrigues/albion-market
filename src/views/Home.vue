@@ -3,7 +3,7 @@
     <v-overlay :value="loading">
       <v-progress-circular :size="128" indeterminate></v-progress-circular>
     </v-overlay>
-    <v-banner single-line elevation="2">
+    <v-banner single-line elevation="2" v-if="$vuetify.breakpoint.lgAndUp">
       Quer preços mais atualizados? Rode o programa enquanto acessa as AH's
       <template v-slot:actions>
         <v-btn text @click="clearCache">Limpar cache</v-btn>
@@ -16,7 +16,7 @@
       </template>
     </v-banner>
     <v-row>
-      <v-col cols="8" sm="10" md="11" class="pb-0">
+      <v-col cols="12" sm="6" md="6" lg="9" class="pb-0">
         <v-autocomplete
           v-model="selected"
           :disabled="isUpdating"
@@ -59,13 +59,20 @@
           </template>
         </v-autocomplete>
       </v-col>
-      <v-col cols="4" sm="2" md="1" class="pb-0">
+      <v-col cols="8" sm="4" md="4" lg="2" class="pb-0">
+        <div class="subtitle-2">Ordenar por</div>
+        <v-radio-group v-model="sortBy" row>
+          <v-radio label="Rentabilidade" value="rentability"></v-radio>
+          <v-radio label="Lucro" value="profit"></v-radio>
+        </v-radio-group>
+      </v-col>
+      <v-col cols="4" sm="2" md="2" lg="1" class="pb-0">
         <div class="subtitle-2">Qualidade</div>
         <v-switch color="primary" v-model="useQuality"></v-switch>
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="6" md="4" lg="3" class="py-0">
+      <v-col cols="6" md="3" lg="3" class="py-0">
         <v-select
           v-model="categories"
           :items="availableCategories"
@@ -75,10 +82,10 @@
           multiple
         ></v-select>
       </v-col>
-      <v-col cols="6" md="4" lg="3" class="py-0">
+      <v-col cols="6" md="3" lg="3" class="py-0">
         <v-select filled height="68" v-model="selectedTier" :items="tiers" label="Tier"></v-select>
       </v-col>
-      <v-col cols="6" md="4" lg="3" class="py-0">
+      <v-col cols="6" md="3" lg="3" class="py-0">
         <v-select
           filled
           height="68"
@@ -88,7 +95,7 @@
           label="De cidade"
         ></v-select>
       </v-col>
-      <v-col cols="6" md="4" lg="3" class="py-0">
+      <v-col cols="6" md="3" lg="3" class="py-0">
         <v-select filled height="68" v-model="toCity" :items="getToCities()" label="Para cidade"></v-select>
       </v-col>
     </v-row>
@@ -242,6 +249,7 @@ export default {
       tiers: ['QUALQUER', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8'],
       selectedTier: 'QUALQUER',
       useQuality: false,
+      sortBy: 'rentability',
       categories: [],
       fromCity: 'QUALQUER',
       toCity: 'QUALQUER'
@@ -269,9 +277,11 @@ export default {
       if (price < 999) {
         return price
       }
-      const k = price / 1000
-      const kSufix = Math.floor(k) > 999 ? 'KK' : 'K'
-      return `${Math.floor(k * 10) / 10}${kSufix}`
+      const isKK = price > 999999
+      const k = isKK ? price / 1000000 : price / 1000
+      const rounder = isKK ? 1000 : 10
+      const kSufix = isKK ? 'KK' : 'K'
+      return `${Math.floor(k * rounder) / rounder}${kSufix}`
     },
     getFromCities () {
       if (this.toCity === 'QUALQUER') {
@@ -311,15 +321,24 @@ export default {
         .filter(item => item.includes(category))
         .map(item => item.id)
     },
+    getFilters () {
+      return {
+        categories: this.categories,
+        selectedTier: this.selectedTier,
+        period: this.period,
+        useQuality: this.useQuality,
+        fromCity: this.fromCity,
+        toCity: this.toCity,
+        sortBy: this.sortBy
+      }
+    },
     getPrices () {
       if (this.selected.length <= 0) {
         return
       }
       this.loading = true
-      pricesByIds(this.selected, {
-        period: this.period,
-        useQuality: this.useQuality
-      }).then(processedItems => {
+      const filters = this.getFilters()
+      pricesByIds(this.selected, filters).then(processedItems => {
         this.results = processedItems
         this.pageCount = 0
         this.loading = false
@@ -327,14 +346,7 @@ export default {
     },
     getBestPrices () {
       this.loading = true
-      const filters = {
-        categories: this.categories,
-        selectedTier: this.selectedTier,
-        period: this.period,
-        useQuality: this.useQuality,
-        fromCity: this.fromCity,
-        toCity: this.toCity
-      }
+      const filters = this.getFilters()
       filteredByPage(filters, this.page).then(result => {
         this.pageCount = result.pageCount
         this.results = result.pageItems

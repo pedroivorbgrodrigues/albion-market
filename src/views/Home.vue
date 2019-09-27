@@ -16,7 +16,7 @@
       </template>
     </v-banner>
     <v-row>
-      <v-col cols="11" class="pb-0">
+      <v-col cols="8" sm="10" md="11" class="pb-0">
         <v-autocomplete
           v-model="selected"
           :disabled="isUpdating"
@@ -28,6 +28,7 @@
           item-text="nome"
           item-value="id"
           multiple
+          validate-on-blur
         >
           <template v-slot:selection="data">
             <v-chip
@@ -58,13 +59,13 @@
           </template>
         </v-autocomplete>
       </v-col>
-      <v-col class="pb-0">
+      <v-col cols="4" sm="2" md="1" class="pb-0">
         <div class="subtitle-2">Qualidade</div>
         <v-switch color="primary" v-model="useQuality"></v-switch>
       </v-col>
     </v-row>
     <v-row>
-      <v-col class="py-0">
+      <v-col cols="6" md="4" lg="3" class="py-0">
         <v-select
           v-model="categories"
           :items="availableCategories"
@@ -74,10 +75,10 @@
           multiple
         ></v-select>
       </v-col>
-      <v-col class="py-0">
+      <v-col cols="6" md="4" lg="3" class="py-0">
         <v-select filled height="68" v-model="selectedTier" :items="tiers" label="Tier"></v-select>
       </v-col>
-      <v-col class="py-0">
+      <v-col cols="6" md="4" lg="3" class="py-0">
         <v-select
           filled
           height="68"
@@ -87,7 +88,7 @@
           label="De cidade"
         ></v-select>
       </v-col>
-      <v-col class="py-0">
+      <v-col cols="6" md="4" lg="3" class="py-0">
         <v-select filled height="68" v-model="toCity" :items="getToCities()" label="Para cidade"></v-select>
       </v-col>
     </v-row>
@@ -96,7 +97,7 @@
         <v-btn block @click="getPrices" dark>Obter viagens para os selecionados</v-btn>
       </v-col>
       <v-col cols="12" v-if="selected.length == 0">
-        <v-btn block color="primary" @click="getBestPrices" dark>Obter melhores viagens</v-btn>
+        <v-btn block color="primary" @click="getBestPrices" dark>Obter melhores viagens (~3min)</v-btn>
       </v-col>
     </v-row>
     <v-row>

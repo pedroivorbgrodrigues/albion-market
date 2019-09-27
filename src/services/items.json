@@ -29413,19 +29413,9 @@
     "name": "Decorative Morgana Cloth Cape"
   },
   {
-    "id": "T2_JOURNAL_WOOD_EMPTY",
-    "nome": "Diário do Lenhador Novato (Vazio)",
-    "name": "Novice Lumberjack's Journal (Empty)"
-  },
-  {
     "id": "T2_JOURNAL_WOOD_FULL",
     "nome": "Diário do Lenhador Novato (Cheio)",
     "name": "Novice Lumberjack's Journal (Full)"
-  },
-  {
-    "id": "T3_JOURNAL_WOOD_EMPTY",
-    "nome": "Diário do Lenhador Iniciante (Vazio)",
-    "name": "Journeyman Lumberjack's Journal (Empty)"
   },
   {
     "id": "T3_JOURNAL_WOOD_FULL",
@@ -29433,19 +29423,9 @@
     "name": "Journeyman Lumberjack's Journal (Full)"
   },
   {
-    "id": "T4_JOURNAL_WOOD_EMPTY",
-    "nome": "Diário do Lenhador Adepto (Vazio)",
-    "name": "Adept Lumberjack's Journal (Empty)"
-  },
-  {
     "id": "T4_JOURNAL_WOOD_FULL",
     "nome": "Diário do Lenhador Adepto (Cheio)",
     "name": "Adept Lumberjack's Journal (Full)"
-  },
-  {
-    "id": "T5_JOURNAL_WOOD_EMPTY",
-    "nome": "Diário do Lenhador Perito (Vazio)",
-    "name": "Expert Lumberjack's Journal (Empty)"
   },
   {
     "id": "T5_JOURNAL_WOOD_FULL",
@@ -29453,19 +29433,9 @@
     "name": "Expert Lumberjack's Journal (Full)"
   },
   {
-    "id": "T6_JOURNAL_WOOD_EMPTY",
-    "nome": "Diário do Lenhador Mestre (Vazio)",
-    "name": "Master Lumberjack's Journal (Empty)"
-  },
-  {
     "id": "T6_JOURNAL_WOOD_FULL",
     "nome": "Diário do Lenhador Mestre (Cheio)",
     "name": "Master Lumberjack's Journal (Full)"
-  },
-  {
-    "id": "T7_JOURNAL_WOOD_EMPTY",
-    "nome": "Diário do Lenhador Grão-mestre (Vazio)",
-    "name": "Grandmaster Lumberjack's Journal (Empty)"
   },
   {
     "id": "T7_JOURNAL_WOOD_FULL",
@@ -29473,19 +29443,9 @@
     "name": "Grandmaster Lumberjack's Journal (Full)"
   },
   {
-    "id": "T8_JOURNAL_WOOD_EMPTY",
-    "nome": "Diário do Lenhador Ancião (Vazio)",
-    "name": "Elder Lumberjack's Journal (Empty)"
-  },
-  {
     "id": "T8_JOURNAL_WOOD_FULL",
     "nome": "Diário do Lenhador Ancião (Cheio)",
     "name": "Elder Lumberjack's Journal (Full)"
-  },
-  {
-    "id": "T2_JOURNAL_STONE_EMPTY",
-    "nome": "Diário do Canteiro Novato (Vazio)",
-    "name": "Novice Stonecutter's Journal (Empty)"
   },
   {
     "id": "T2_JOURNAL_STONE_FULL",
@@ -29493,19 +29453,9 @@
     "name": "Novice Stonecutter's Journal (Full)"
   },
   {
-    "id": "T3_JOURNAL_STONE_EMPTY",
-    "nome": "Diário do Canteiro Iniciante (Vazio)",
-    "name": "Journeyman Stonecutter's Journal (Empty)"
-  },
-  {
     "id": "T3_JOURNAL_STONE_FULL",
     "nome": "Diário do Canteiro Iniciante (Cheio)",
     "name": "Journeyman Stonecutter's Journal (Full)"
-  },
-  {
-    "id": "T4_JOURNAL_STONE_EMPTY",
-    "nome": "Diário do Canteiro Adepto (Vazio)",
-    "name": "Adept Stonecutter's Journal (Empty)"
   },
   {
     "id": "T4_JOURNAL_STONE_FULL",
@@ -29513,19 +29463,9 @@
     "name": "Adept Stonecutter's Journal (Full)"
   },
   {
-    "id": "T5_JOURNAL_STONE_EMPTY",
-    "nome": "Diário do Canteiro Perito (Vazio)",
-    "name": "Expert Stonecutter's Journal (Empty)"
-  },
-  {
     "id": "T5_JOURNAL_STONE_FULL",
     "nome": "Diário do Canteiro Perito (Cheio)",
     "name": "Expert Stonecutter's Journal (Full)"
-  },
-  {
-    "id": "T6_JOURNAL_STONE_EMPTY",
-    "nome": "Diário do Canteiro Mestre (Vazio)",
-    "name": "Master Stonecutter's Journal (Empty)"
   },
   {
     "id": "T6_JOURNAL_STONE_FULL",
@@ -29533,19 +29473,9 @@
     "name": "Master Stonecutter's Journal (Full)"
   },
   {
-    "id": "T7_JOURNAL_STONE_EMPTY",
-    "nome": "Diário do Canteiro Grão-mestre (Vazio)",
-    "name": "Grandmaster Stonecutter's Journal (Empty)"
-  },
-  {
     "id": "T7_JOURNAL_STONE_FULL",
     "nome": "Diário do Canteiro Grão-mestre (Cheio)",
     "name": "Grandmaster Stonecutter's Journal (Full)"
-  },
-  {
-    "id": "T8_JOURNAL_STONE_EMPTY",
-    "nome": "Diário do Canteiro Ancião (Vazio)",
-    "name": "Elder Stonecutter's Journal (Empty)"
   },
   {
     "id": "T8_JOURNAL_STONE_FULL",
@@ -29553,19 +29483,9 @@
     "name": "Elder Stonecutter's Journal (Full)"
   },
   {
-    "id": "T2_JOURNAL_ORE_EMPTY",
-    "nome": "Diário do Prospector Novato (Vazio)",
-    "name": "Novice Prospector's Journal (Empty)"
-  },
-  {
     "id": "T2_JOURNAL_ORE_FULL",
     "nome": "Diário do Prospector Novato (Cheio)",
     "name": "Novice Prospector's Journal (Full)"
-  },
-  {
-    "id": "T3_JOURNAL_ORE_EMPTY",
-    "nome": "Diário do Prospector Iniciante (Vazio)",
-    "name": "Journeyman Prospector's Journal (Empty)"
   },
   {
     "id": "T3_JOURNAL_ORE_FULL",
@@ -29573,19 +29493,9 @@
     "name": "Journeyman Prospector's Journal (Full)"
   },
   {
-    "id": "T4_JOURNAL_ORE_EMPTY",
-    "nome": "Diário do Prospector Adepto (Vazio)",
-    "name": "Adept Prospector's Journal (Empty)"
-  },
-  {
     "id": "T4_JOURNAL_ORE_FULL",
     "nome": "Diário do Prospector Adepto (Cheio)",
     "name": "Adept Prospector's Journal (Full)"
-  },
-  {
-    "id": "T5_JOURNAL_ORE_EMPTY",
-    "nome": "Diário do Prospector Perito (Vazio)",
-    "name": "Expert Prospector's Journal (Empty)"
   },
   {
     "id": "T5_JOURNAL_ORE_FULL",
@@ -29593,19 +29503,9 @@
     "name": "Expert Prospector's Journal (Full)"
   },
   {
-    "id": "T6_JOURNAL_ORE_EMPTY",
-    "nome": "Diário do Prospector Mestre (Vazio)",
-    "name": "Master Prospector's Journal (Empty)"
-  },
-  {
     "id": "T6_JOURNAL_ORE_FULL",
     "nome": "Diário do Prospector Mestre (Cheio)",
     "name": "Master Prospector's Journal (Full)"
-  },
-  {
-    "id": "T7_JOURNAL_ORE_EMPTY",
-    "nome": "Diário do Prospector Grão-mestre (Vazio)",
-    "name": "Grandmaster Prospector's Journal (Empty)"
   },
   {
     "id": "T7_JOURNAL_ORE_FULL",
@@ -29613,19 +29513,9 @@
     "name": "Grandmaster Prospector's Journal (Full)"
   },
   {
-    "id": "T8_JOURNAL_ORE_EMPTY",
-    "nome": "Diário do Prospector Ancião (Vazio)",
-    "name": "Elder Prospector's Journal (Empty)"
-  },
-  {
     "id": "T8_JOURNAL_ORE_FULL",
     "nome": "Diário do Prospector Ancião (Cheio)",
     "name": "Elder Prospector's Journal (Full)"
-  },
-  {
-    "id": "T2_JOURNAL_FIBER_EMPTY",
-    "nome": "Diário do Lavrador Novato (Vazio)",
-    "name": "Novice Cropper's Journal (Empty)"
   },
   {
     "id": "T2_JOURNAL_FIBER_FULL",
@@ -29633,19 +29523,9 @@
     "name": "Novice Cropper's Journal (Full)"
   },
   {
-    "id": "T3_JOURNAL_FIBER_EMPTY",
-    "nome": "Diário do Lavrador Iniciante (Vazio)",
-    "name": "Journeyman Cropper's Journal (Empty)"
-  },
-  {
     "id": "T3_JOURNAL_FIBER_FULL",
     "nome": "Diário do Lavrador Iniciante (Cheio)",
     "name": "Journeyman Cropper's Journal (Full)"
-  },
-  {
-    "id": "T4_JOURNAL_FIBER_EMPTY",
-    "nome": "Diário do Lavrador Adepto (Vazio)",
-    "name": "Adept Cropper's Journal (Empty)"
   },
   {
     "id": "T4_JOURNAL_FIBER_FULL",
@@ -29653,19 +29533,9 @@
     "name": "Adept Cropper's Journal (Full)"
   },
   {
-    "id": "T5_JOURNAL_FIBER_EMPTY",
-    "nome": "Diário do Lavrador Perito (Vazio)",
-    "name": "Expert Cropper's Journal (Empty)"
-  },
-  {
     "id": "T5_JOURNAL_FIBER_FULL",
     "nome": "Diário do Lavrador Perito (Cheio)",
     "name": "Expert Cropper's Journal (Full)"
-  },
-  {
-    "id": "T6_JOURNAL_FIBER_EMPTY",
-    "nome": "Diário do Lavrador Mestre (Vazio)",
-    "name": "Master Cropper's Journal (Empty)"
   },
   {
     "id": "T6_JOURNAL_FIBER_FULL",
@@ -29673,19 +29543,9 @@
     "name": "Master Cropper's Journal (Full)"
   },
   {
-    "id": "T7_JOURNAL_FIBER_EMPTY",
-    "nome": "Diário do Lavrador Grão-mestre (Vazio)",
-    "name": "Grandmaster Cropper's Journal (Empty)"
-  },
-  {
     "id": "T7_JOURNAL_FIBER_FULL",
     "nome": "Diário do Lavrador Grão-mestre (Cheio)",
     "name": "Grandmaster Cropper's Journal (Full)"
-  },
-  {
-    "id": "T8_JOURNAL_FIBER_EMPTY",
-    "nome": "Diário do Lavrador Ancião (Vazio)",
-    "name": "Elder Cropper's Journal (Empty)"
   },
   {
     "id": "T8_JOURNAL_FIBER_FULL",
@@ -29693,19 +29553,9 @@
     "name": "Elder Cropper's Journal (Full)"
   },
   {
-    "id": "T2_JOURNAL_HIDE_EMPTY",
-    "nome": "Diário do Guarda-caça Novato (Vazio)",
-    "name": "Novice Gamekeeper's Journal (Empty)"
-  },
-  {
     "id": "T2_JOURNAL_HIDE_FULL",
     "nome": "Diário do Guarda-caça Novato (Cheio)",
     "name": "Novice Gamekeeper's Journal (Full)"
-  },
-  {
-    "id": "T3_JOURNAL_HIDE_EMPTY",
-    "nome": "Diário do Guarda-caça Iniciante (Vazio)",
-    "name": "Journeyman Gamekeeper's Journal (Empty)"
   },
   {
     "id": "T3_JOURNAL_HIDE_FULL",
@@ -29713,19 +29563,9 @@
     "name": "Journeyman Gamekeeper's Journal (Full)"
   },
   {
-    "id": "T4_JOURNAL_HIDE_EMPTY",
-    "nome": "Diário do Guarda-caça Adepto (Vazio)",
-    "name": "Adept Gamekeeper's Journal (Empty)"
-  },
-  {
     "id": "T4_JOURNAL_HIDE_FULL",
     "nome": "Diário do Guarda-caça Adepto (Cheio)",
     "name": "Adept Gamekeeper's Journal (Full)"
-  },
-  {
-    "id": "T5_JOURNAL_HIDE_EMPTY",
-    "nome": "Diário do Guarda-caça Perito (Vazio)",
-    "name": "Expert Gamekeeper's Journal (Empty)"
   },
   {
     "id": "T5_JOURNAL_HIDE_FULL",
@@ -29733,19 +29573,9 @@
     "name": "Expert Gamekeeper's Journal (Full)"
   },
   {
-    "id": "T6_JOURNAL_HIDE_EMPTY",
-    "nome": "Diário do Guarda-caça Mestre (Vazio)",
-    "name": "Master Gamekeeper's Journal (Empty)"
-  },
-  {
     "id": "T6_JOURNAL_HIDE_FULL",
     "nome": "Diário do Guarda-caça Mestre (Cheio)",
     "name": "Master Gamekeeper's Journal (Full)"
-  },
-  {
-    "id": "T7_JOURNAL_HIDE_EMPTY",
-    "nome": "Diário do Guarda-caça Grão-mestre (Vazio)",
-    "name": "Grandmaster Gamekeeper's Journal (Empty)"
   },
   {
     "id": "T7_JOURNAL_HIDE_FULL",
@@ -29753,19 +29583,9 @@
     "name": "Grandmaster Gamekeeper's Journal (Full)"
   },
   {
-    "id": "T8_JOURNAL_HIDE_EMPTY",
-    "nome": "Diário do Guarda-caça Ancião (Vazio)",
-    "name": "Elder Gamekeeper's Journal (Empty)"
-  },
-  {
     "id": "T8_JOURNAL_HIDE_FULL",
     "nome": "Diário do Guarda-caça Ancião (Cheio)",
     "name": "Elder Gamekeeper's Journal (Full)"
-  },
-  {
-    "id": "T2_JOURNAL_WARRIOR_EMPTY",
-    "nome": "Diário do Ferreiro Novato (Vazio)",
-    "name": "Novice Blacksmith's Journal (Empty)"
   },
   {
     "id": "T2_JOURNAL_WARRIOR_FULL",
@@ -29773,19 +29593,9 @@
     "name": "Novice Blacksmith's Journal (Full)"
   },
   {
-    "id": "T3_JOURNAL_WARRIOR_EMPTY",
-    "nome": "Diário do Ferreiro Iniciante (Vazio)",
-    "name": "Journeyman Blacksmith's Journal (Empty)"
-  },
-  {
     "id": "T3_JOURNAL_WARRIOR_FULL",
     "nome": "Diário do Ferreiro Iniciante (Cheio)",
     "name": "Journeyman Blacksmith's Journal (Full)"
-  },
-  {
-    "id": "T4_JOURNAL_WARRIOR_EMPTY",
-    "nome": "Diário do Ferreiro Adepto (Vazio)",
-    "name": "Adept Blacksmith's Journal (Empty)"
   },
   {
     "id": "T4_JOURNAL_WARRIOR_FULL",
@@ -29793,19 +29603,9 @@
     "name": "Adept Blacksmith's Journal (Full)"
   },
   {
-    "id": "T5_JOURNAL_WARRIOR_EMPTY",
-    "nome": "Diário do Ferreiro Perito (Vazio)",
-    "name": "Expert Blacksmith's Journal (Empty)"
-  },
-  {
     "id": "T5_JOURNAL_WARRIOR_FULL",
     "nome": "Diário do Ferreiro Perito (Cheio)",
     "name": "Expert Blacksmith's Journal (Full)"
-  },
-  {
-    "id": "T6_JOURNAL_WARRIOR_EMPTY",
-    "nome": "Diário do Ferreiro Mestre (Vazio)",
-    "name": "Master Blacksmith's Journal (Empty)"
   },
   {
     "id": "T6_JOURNAL_WARRIOR_FULL",
@@ -29813,19 +29613,9 @@
     "name": "Master Blacksmith's Journal (Full)"
   },
   {
-    "id": "T7_JOURNAL_WARRIOR_EMPTY",
-    "nome": "Diário do Ferreiro Grão-mestre (Vazio)",
-    "name": "Grandmaster Blacksmith's Journal (Empty)"
-  },
-  {
     "id": "T7_JOURNAL_WARRIOR_FULL",
     "nome": "Diário do Ferreiro Grão-mestre (Cheio)",
     "name": "Grandmaster Blacksmith's Journal (Full)"
-  },
-  {
-    "id": "T8_JOURNAL_WARRIOR_EMPTY",
-    "nome": "Diário do Ferreiro Ancião (Vazio)",
-    "name": "Elder Blacksmith's Journal (Empty)"
   },
   {
     "id": "T8_JOURNAL_WARRIOR_FULL",
@@ -29833,19 +29623,9 @@
     "name": "Elder Blacksmith's Journal (Full)"
   },
   {
-    "id": "T2_JOURNAL_HUNTER_EMPTY",
-    "nome": "Diário do Flecheiro Novato (Vazio)",
-    "name": "Novice Fletcher's Journal (Empty)"
-  },
-  {
     "id": "T2_JOURNAL_HUNTER_FULL",
     "nome": "Diário do Flecheiro Novato (Cheio)",
     "name": "Novice Fletcher's Journal (Full)"
-  },
-  {
-    "id": "T3_JOURNAL_HUNTER_EMPTY",
-    "nome": "Diário do Flecheiro Iniciante (Vazio)",
-    "name": "Journeyman Fletcher's Journal (Empty)"
   },
   {
     "id": "T3_JOURNAL_HUNTER_FULL",
@@ -29853,19 +29633,9 @@
     "name": "Journeyman Fletcher's Journal (Full)"
   },
   {
-    "id": "T4_JOURNAL_HUNTER_EMPTY",
-    "nome": "Diário do Flecheiro Adepto (Vazio)",
-    "name": "Adept Fletcher's Journal (Empty)"
-  },
-  {
     "id": "T4_JOURNAL_HUNTER_FULL",
     "nome": "Diário do Flecheiro Adepto (Cheio)",
     "name": "Adept Fletcher's Journal (Full)"
-  },
-  {
-    "id": "T5_JOURNAL_HUNTER_EMPTY",
-    "nome": "Diário do Flecheiro Perito (Vazio)",
-    "name": "Expert Fletcher's Journal (Empty)"
   },
   {
     "id": "T5_JOURNAL_HUNTER_FULL",
@@ -29873,19 +29643,9 @@
     "name": "Expert Fletcher's Journal (Full)"
   },
   {
-    "id": "T6_JOURNAL_HUNTER_EMPTY",
-    "nome": "Diário do Flecheiro Mestre (Vazio)",
-    "name": "Master Fletcher's Journal (Empty)"
-  },
-  {
     "id": "T6_JOURNAL_HUNTER_FULL",
     "nome": "Diário do Flecheiro Mestre (Cheio)",
     "name": "Master Fletcher's Journal (Full)"
-  },
-  {
-    "id": "T7_JOURNAL_HUNTER_EMPTY",
-    "nome": "Diário do Flecheiro Grão-mestre (Vazio)",
-    "name": "Grandmaster Fletcher's Journal (Empty)"
   },
   {
     "id": "T7_JOURNAL_HUNTER_FULL",
@@ -29893,19 +29653,9 @@
     "name": "Grandmaster Fletcher's Journal (Full)"
   },
   {
-    "id": "T8_JOURNAL_HUNTER_EMPTY",
-    "nome": "Diário do Flecheiro Ancião (Vazio)",
-    "name": "Elder Fletcher's Journal (Empty)"
-  },
-  {
     "id": "T8_JOURNAL_HUNTER_FULL",
     "nome": "Diário do Flecheiro Ancião (Cheio)",
     "name": "Elder Fletcher's Journal (Full)"
-  },
-  {
-    "id": "T2_JOURNAL_MAGE_EMPTY",
-    "nome": "Diário do Imbuidor Novato (Vazio)",
-    "name": "Novice Imbuer's Journal (Empty)"
   },
   {
     "id": "T2_JOURNAL_MAGE_FULL",
@@ -29913,19 +29663,9 @@
     "name": "Novice Imbuer's Journal (Full)"
   },
   {
-    "id": "T3_JOURNAL_MAGE_EMPTY",
-    "nome": "Diário do Imbuidor Iniciante (Vazio)",
-    "name": "Journeyman Imbuer's Journal (Empty)"
-  },
-  {
     "id": "T3_JOURNAL_MAGE_FULL",
     "nome": "Diário do Imbuidor Iniciante (Cheio)",
     "name": "Journeyman Imbuer's Journal (Full)"
-  },
-  {
-    "id": "T4_JOURNAL_MAGE_EMPTY",
-    "nome": "Diário do Imbuidor Adepto (Vazio)",
-    "name": "Adept Imbuer's Journal (Empty)"
   },
   {
     "id": "T4_JOURNAL_MAGE_FULL",
@@ -29933,19 +29673,9 @@
     "name": "Adept Imbuer's Journal (Full)"
   },
   {
-    "id": "T5_JOURNAL_MAGE_EMPTY",
-    "nome": "Diário do Imbuidor Perito (Vazio)",
-    "name": "Expert Imbuer's Journal (Empty)"
-  },
-  {
     "id": "T5_JOURNAL_MAGE_FULL",
     "nome": "Diário do Imbuidor Perito (Cheio)",
     "name": "Expert Imbuer's Journal (Full)"
-  },
-  {
-    "id": "T6_JOURNAL_MAGE_EMPTY",
-    "nome": "Diário do Imbuidor Mestre (Vazio)",
-    "name": "Master Imbuer's Journal (Empty)"
   },
   {
     "id": "T6_JOURNAL_MAGE_FULL",
@@ -29953,19 +29683,9 @@
     "name": "Master Imbuer's Journal (Full)"
   },
   {
-    "id": "T7_JOURNAL_MAGE_EMPTY",
-    "nome": "Diário do Imbuidor Grão-mestre (Vazio)",
-    "name": "Grandmaster Imbuer's Journal (Empty)"
-  },
-  {
     "id": "T7_JOURNAL_MAGE_FULL",
     "nome": "Diário do Imbuidor Grão-mestre (Cheio)",
     "name": "Grandmaster Imbuer's Journal (Full)"
-  },
-  {
-    "id": "T8_JOURNAL_MAGE_EMPTY",
-    "nome": "Diário do Imbuidor Ancião (Vazio)",
-    "name": "Elder Imbuer's Journal (Empty)"
   },
   {
     "id": "T8_JOURNAL_MAGE_FULL",
@@ -29973,19 +29693,9 @@
     "name": "Elder Imbuer's Journal (Full)"
   },
   {
-    "id": "T2_JOURNAL_TOOLMAKER_EMPTY",
-    "nome": "Diário do Funileiro Novato (Vazio)",
-    "name": "Novice Tinker's Journal (Empty)"
-  },
-  {
     "id": "T2_JOURNAL_TOOLMAKER_FULL",
     "nome": "Diário do Funileiro Novato (Cheio)",
     "name": "Novice Tinker's Journal (Full)"
-  },
-  {
-    "id": "T3_JOURNAL_TOOLMAKER_EMPTY",
-    "nome": "Diário do Funileiro Iniciante (Vazio)",
-    "name": "Journeyman Tinker's Journal (Empty)"
   },
   {
     "id": "T3_JOURNAL_TOOLMAKER_FULL",
@@ -29993,19 +29703,9 @@
     "name": "Journeyman Tinker's Journal (Full)"
   },
   {
-    "id": "T4_JOURNAL_TOOLMAKER_EMPTY",
-    "nome": "Diário do Funileiro Adepto (Vazio)",
-    "name": "Adept Tinker's Journal (Empty)"
-  },
-  {
     "id": "T4_JOURNAL_TOOLMAKER_FULL",
     "nome": "Diário do Funileiro Adepto (Cheio)",
     "name": "Adept Tinker's Journal (Full)"
-  },
-  {
-    "id": "T5_JOURNAL_TOOLMAKER_EMPTY",
-    "nome": "Diário do Funileiro Perito (Vazio)",
-    "name": "Expert Tinker's Journal (Empty)"
   },
   {
     "id": "T5_JOURNAL_TOOLMAKER_FULL",
@@ -30013,19 +29713,9 @@
     "name": "Expert Tinker's Journal (Full)"
   },
   {
-    "id": "T6_JOURNAL_TOOLMAKER_EMPTY",
-    "nome": "Diário do Funileiro Mestre (Vazio)",
-    "name": "Master Tinker's Journal (Empty)"
-  },
-  {
     "id": "T6_JOURNAL_TOOLMAKER_FULL",
     "nome": "Diário do Funileiro Mestre (Cheio)",
     "name": "Master Tinker's Journal (Full)"
-  },
-  {
-    "id": "T7_JOURNAL_TOOLMAKER_EMPTY",
-    "nome": "Diário do Funileiro Grão-mestre (Vazio)",
-    "name": "Grandmaster Tinker's Journal (Empty)"
   },
   {
     "id": "T7_JOURNAL_TOOLMAKER_FULL",
@@ -30033,19 +29723,9 @@
     "name": "Grandmaster Tinker's Journal (Full)"
   },
   {
-    "id": "T8_JOURNAL_TOOLMAKER_EMPTY",
-    "nome": "Diário do Funileiro Ancião (Vazio)",
-    "name": "Elder Tinker's Journal (Empty)"
-  },
-  {
     "id": "T8_JOURNAL_TOOLMAKER_FULL",
     "nome": "Diário do Funileiro Ancião (Cheio)",
     "name": "Elder Tinker's Journal (Full)"
-  },
-  {
-    "id": "T2_JOURNAL_MERCENARY_EMPTY",
-    "nome": "Diário do Mercenário Novato (Vazio)",
-    "name": "Novice Mercenary's Journal (Empty)"
   },
   {
     "id": "T2_JOURNAL_MERCENARY_FULL",
@@ -30053,19 +29733,9 @@
     "name": "Novice Mercenary's Journal (Full)"
   },
   {
-    "id": "T3_JOURNAL_MERCENARY_EMPTY",
-    "nome": "Diário do Mercenário Iniciante (Vazio)",
-    "name": "Journeyman Mercenary's Journal (Empty)"
-  },
-  {
     "id": "T3_JOURNAL_MERCENARY_FULL",
     "nome": "Diário do Mercenário Iniciante (Cheio)",
     "name": "Journeyman Mercenary's Journal (Full)"
-  },
-  {
-    "id": "T4_JOURNAL_MERCENARY_EMPTY",
-    "nome": "Diário do Mercenário Adepto (Vazio)",
-    "name": "Adept Mercenary's Journal (Empty)"
   },
   {
     "id": "T4_JOURNAL_MERCENARY_FULL",
@@ -30073,19 +29743,9 @@
     "name": "Adept Mercenary's Journal (Full)"
   },
   {
-    "id": "T5_JOURNAL_MERCENARY_EMPTY",
-    "nome": "Diário do Mercenário Perito (Vazio)",
-    "name": "Expert Mercenary's Journal (Empty)"
-  },
-  {
     "id": "T5_JOURNAL_MERCENARY_FULL",
     "nome": "Diário do Mercenário Perito (Cheio)",
     "name": "Expert Mercenary's Journal (Full)"
-  },
-  {
-    "id": "T6_JOURNAL_MERCENARY_EMPTY",
-    "nome": "Diário do Mercenário Mestre (Vazio)",
-    "name": "Master Mercenary's Journal (Empty)"
   },
   {
     "id": "T6_JOURNAL_MERCENARY_FULL",
@@ -30093,19 +29753,9 @@
     "name": "Master Mercenary's Journal (Full)"
   },
   {
-    "id": "T7_JOURNAL_MERCENARY_EMPTY",
-    "nome": "Diário do Mercenário Grão-mestre (Vazio)",
-    "name": "Grandmaster Mercenary's Journal (Empty)"
-  },
-  {
     "id": "T7_JOURNAL_MERCENARY_FULL",
     "nome": "Diário do Mercenário Grão-mestre (Cheio)",
     "name": "Grandmaster Mercenary's Journal (Full)"
-  },
-  {
-    "id": "T8_JOURNAL_MERCENARY_EMPTY",
-    "nome": "Diário do Mercenário Ancião (Vazio)",
-    "name": "Elder Mercenary's Journal (Empty)"
   },
   {
     "id": "T8_JOURNAL_MERCENARY_FULL",
@@ -30113,19 +29763,9 @@
     "name": "Elder Mercenary's Journal (Full)"
   },
   {
-    "id": "T2_JOURNAL_TROPHY_GENERAL_EMPTY",
-    "nome": "Diário de Troféus do Generalista Novato (Vazio)",
-    "name": "Novice's Generalist Trophy Journal (Empty)"
-  },
-  {
     "id": "T2_JOURNAL_TROPHY_GENERAL_FULL",
     "nome": "Diário de Troféus do Generalista Novato (cheio)",
     "name": "Novice's Generalist Trophy Journal (Full)"
-  },
-  {
-    "id": "T3_JOURNAL_TROPHY_GENERAL_EMPTY",
-    "nome": "Diário de Troféus do Generalista Iniciante (Vazio)",
-    "name": "Journeyman's Generalist Trophy Journal (Empty)"
   },
   {
     "id": "T3_JOURNAL_TROPHY_GENERAL_FULL",
@@ -30133,19 +29773,9 @@
     "name": "Journeyman's Generalist Trophy Journal (Full)"
   },
   {
-    "id": "T4_JOURNAL_TROPHY_GENERAL_EMPTY",
-    "nome": "Diário de Troféus do Generalista Adepto (Vazio)",
-    "name": "Adept's Generalist Trophy Journal (Empty)"
-  },
-  {
     "id": "T4_JOURNAL_TROPHY_GENERAL_FULL",
     "nome": "Diário de Troféus do Generalista Adepto (Cheio)",
     "name": "Adept's Generalist Trophy Journal (Full)"
-  },
-  {
-    "id": "T5_JOURNAL_TROPHY_GENERAL_EMPTY",
-    "nome": "Diário de Troféus do Generalista Perito (Vazio)",
-    "name": "Expert's Generalist Trophy Journal (Empty)"
   },
   {
     "id": "T5_JOURNAL_TROPHY_GENERAL_FULL",
@@ -30153,19 +29783,9 @@
     "name": "Expert's Generalist Trophy Journal (Full)"
   },
   {
-    "id": "T6_JOURNAL_TROPHY_GENERAL_EMPTY",
-    "nome": "Diário de Troféus do Generalista Mestre (Vazio)",
-    "name": "Master's Generalist Trophy Journal (Empty)"
-  },
-  {
     "id": "T6_JOURNAL_TROPHY_GENERAL_FULL",
     "nome": "Diário de Troféus do Generalista Mestre (Cheio)",
     "name": "Master's Generalist Trophy Journal (Full)"
-  },
-  {
-    "id": "T7_JOURNAL_TROPHY_GENERAL_EMPTY",
-    "nome": "Diário de Troféus do Generalista Grão-mestre (Vazio)",
-    "name": "Grandmaster's Generalist Trophy Journal (Empty)"
   },
   {
     "id": "T7_JOURNAL_TROPHY_GENERAL_FULL",
@@ -30173,19 +29793,9 @@
     "name": "Grandmaster's Generalist Trophy Journal (Full)"
   },
   {
-    "id": "T8_JOURNAL_TROPHY_GENERAL_EMPTY",
-    "nome": "Diário de Troféus do Generalista Ancião (Vazio)",
-    "name": "Elder's Generalist Trophy Journal (Empty)"
-  },
-  {
     "id": "T8_JOURNAL_TROPHY_GENERAL_FULL",
     "nome": "Diário de Troféus do Generalista Ancião (Cheio)",
     "name": "Elder's Generalist Trophy Journal (Full)"
-  },
-  {
-    "id": "T2_JOURNAL_TROPHY_MERCENARY_EMPTY",
-    "nome": "Diário de Troféus do Mercenário Novato (Vazio)",
-    "name": "Novice Mercenary's Trophy Journal (Empty)"
   },
   {
     "id": "T2_JOURNAL_TROPHY_MERCENARY_FULL",
@@ -30193,19 +29803,9 @@
     "name": "Novice Mercenary's Trophy Journal (Full)"
   },
   {
-    "id": "T3_JOURNAL_TROPHY_MERCENARY_EMPTY",
-    "nome": "Diário de Troféus do Mercenário Iniciante (Vazio)",
-    "name": "Journeyman Mercenary's Trophy Journal (Empty)"
-  },
-  {
     "id": "T3_JOURNAL_TROPHY_MERCENARY_FULL",
     "nome": "Diário de Troféus do Mercenário Iniciante (Cheio)",
     "name": "Journeyman Mercenary's Trophy Journal (Full)"
-  },
-  {
-    "id": "T4_JOURNAL_TROPHY_MERCENARY_EMPTY",
-    "nome": "Diário de Troféus do Mercenário Adepto (Vazio)",
-    "name": "Adept Mercenary's Trophy Journal (Empty)"
   },
   {
     "id": "T4_JOURNAL_TROPHY_MERCENARY_FULL",
@@ -30213,19 +29813,9 @@
     "name": "Adept Mercenary's Trophy Journal (Full)"
   },
   {
-    "id": "T5_JOURNAL_TROPHY_MERCENARY_EMPTY",
-    "nome": "Diário de Troféus do Mercenário Perito (Vazio)",
-    "name": "Expert Mercenary's Trophy Journal (Empty)"
-  },
-  {
     "id": "T5_JOURNAL_TROPHY_MERCENARY_FULL",
     "nome": "Diário de Troféus do Mercenário Perito (Cheio)",
     "name": "Expert Mercenary's Trophy Journal (Full)"
-  },
-  {
-    "id": "T6_JOURNAL_TROPHY_MERCENARY_EMPTY",
-    "nome": "Diário de Troféus do Mercenário Mestre (Vazio)",
-    "name": "Master Mercenary's Trophy Journal (Empty)"
   },
   {
     "id": "T6_JOURNAL_TROPHY_MERCENARY_FULL",
@@ -30233,19 +29823,9 @@
     "name": "Master Mercenary's Trophy Journal (Full)"
   },
   {
-    "id": "T7_JOURNAL_TROPHY_MERCENARY_EMPTY",
-    "nome": "Diário de Troféus do Mercenário Grão-mestre (Vazio)",
-    "name": "Grandmaster Mercenary's Trophy Journal (Empty)"
-  },
-  {
     "id": "T7_JOURNAL_TROPHY_MERCENARY_FULL",
     "nome": "Diário de Troféus do Mercenário Grão-mestre (Cheio)",
     "name": "Grandmaster Mercenary's Trophy Journal (Full)"
-  },
-  {
-    "id": "T8_JOURNAL_TROPHY_MERCENARY_EMPTY",
-    "nome": "Diário de Troféus do Mercenário Ancião (Vazio)",
-    "name": "Elder Mercenary's Trophy Journal (Empty)"
   },
   {
     "id": "T8_JOURNAL_TROPHY_MERCENARY_FULL",
@@ -30253,19 +29833,9 @@
     "name": "Elder Mercenary's Trophy Journal (Full)"
   },
   {
-    "id": "T2_JOURNAL_TROPHY_HIDE_EMPTY",
-    "nome": "Diário de Troféus do Guarda-caça Novato (Vazio)",
-    "name": "Novice Gamekeeper's Trophy Journal (Empty)"
-  },
-  {
     "id": "T2_JOURNAL_TROPHY_HIDE_FULL",
     "nome": "Diário de Troféus do Guarda-caça Novato (Cheio)",
     "name": "Novice Gamekeeper's Trophy Journal (Full)"
-  },
-  {
-    "id": "T3_JOURNAL_TROPHY_HIDE_EMPTY",
-    "nome": "Diário de Troféus do Guarda-caça Iniciante (Vazio)",
-    "name": "Journeyman Gamekeeper's Trophy Journal (Empty)"
   },
   {
     "id": "T3_JOURNAL_TROPHY_HIDE_FULL",
@@ -30273,19 +29843,9 @@
     "name": "Journeyman Gamekeeper's Trophy Journal (Full)"
   },
   {
-    "id": "T4_JOURNAL_TROPHY_HIDE_EMPTY",
-    "nome": "Diário de Troféus do Guarda-caça Adepto (Vazio)",
-    "name": "Adept Gamekeeper's Trophy Journal (Empty)"
-  },
-  {
     "id": "T4_JOURNAL_TROPHY_HIDE_FULL",
     "nome": "Diário de Troféus do Guarda-caça Adepto (Cheio)",
     "name": "Adept Gamekeeper's Trophy Journal (Full)"
-  },
-  {
-    "id": "T5_JOURNAL_TROPHY_HIDE_EMPTY",
-    "nome": "Diário de Troféus do Guarda-caça Perito (Vazio)",
-    "name": "Expert Gamekeeper's Trophy Journal (Empty)"
   },
   {
     "id": "T5_JOURNAL_TROPHY_HIDE_FULL",
@@ -30293,19 +29853,9 @@
     "name": "Expert Gamekeeper's Trophy Journal (Full)"
   },
   {
-    "id": "T6_JOURNAL_TROPHY_HIDE_EMPTY",
-    "nome": "Diário de Troféus do Guarda-caça Mestre (Vazio)",
-    "name": "Master Gamekeeper's Trophy Journal (Empty)"
-  },
-  {
     "id": "T6_JOURNAL_TROPHY_HIDE_FULL",
     "nome": "Diário de Troféus do Guarda-caça Mestre (Cheio)",
     "name": "Master Gamekeeper's Trophy Journal (Full)"
-  },
-  {
-    "id": "T7_JOURNAL_TROPHY_HIDE_EMPTY",
-    "nome": "Diário de Troféus do Guarda-caça Grão-mestre (Vazio)",
-    "name": "Grandmaster Gamekeeper's Trophy Journal (Empty)"
   },
   {
     "id": "T7_JOURNAL_TROPHY_HIDE_FULL",
@@ -30313,19 +29863,9 @@
     "name": "Grandmaster Gamekeeper's Trophy Journal (Full)"
   },
   {
-    "id": "T8_JOURNAL_TROPHY_HIDE_EMPTY",
-    "nome": "Diário de Troféus do Guarda-caça Ancião (Vazio)",
-    "name": "Elder Gamekeeper's Trophy Journal (Empty)"
-  },
-  {
     "id": "T8_JOURNAL_TROPHY_HIDE_FULL",
     "nome": "Diário de Troféus do Guarda-caça Ancião (Cheio)",
     "name": "Elder Gamekeeper's Trophy Journal (Full)"
-  },
-  {
-    "id": "T2_JOURNAL_TROPHY_WOOD_EMPTY",
-    "nome": "Diário de Troféus do Lenhador Novato (Vazio)",
-    "name": "Novice Lumberjack's Trophy Journal (Empty)"
   },
   {
     "id": "T2_JOURNAL_TROPHY_WOOD_FULL",
@@ -30333,19 +29873,9 @@
     "name": "Novice Lumberjack's Trophy Journal (Full)"
   },
   {
-    "id": "T3_JOURNAL_TROPHY_WOOD_EMPTY",
-    "nome": "Diário de Troféus do Lenhador Iniciante (Vazio)",
-    "name": "Journeyman Lumberjack's Trophy Journal (Empty)"
-  },
-  {
     "id": "T3_JOURNAL_TROPHY_WOOD_FULL",
     "nome": "Diário de Troféus do Lenhador Iniciante (Cheio)",
     "name": "Journeyman Lumberjack's Trophy Journal (Full)"
-  },
-  {
-    "id": "T4_JOURNAL_TROPHY_WOOD_EMPTY",
-    "nome": "Diário de Troféus do Lenhador Adepto (Vazio)",
-    "name": "Adept Lumberjack's Trophy Journal (Empty)"
   },
   {
     "id": "T4_JOURNAL_TROPHY_WOOD_FULL",
@@ -30353,19 +29883,9 @@
     "name": "Adept Lumberjack's Trophy Journal (Full)"
   },
   {
-    "id": "T5_JOURNAL_TROPHY_WOOD_EMPTY",
-    "nome": "Diário de Troféus do Lenhador Perito (Vazio)",
-    "name": "Expert Lumberjack's Trophy Journal (Empty)"
-  },
-  {
     "id": "T5_JOURNAL_TROPHY_WOOD_FULL",
     "nome": "Diário de Troféus do Lenhador Perito (Cheio)",
     "name": "Expert Lumberjack's Trophy Journal (Full)"
-  },
-  {
-    "id": "T6_JOURNAL_TROPHY_WOOD_EMPTY",
-    "nome": "Diário de Troféus do Lenhador Mestre (Vazio)",
-    "name": "Master Lumberjack's Trophy Journal (Empty)"
   },
   {
     "id": "T6_JOURNAL_TROPHY_WOOD_FULL",
@@ -30373,19 +29893,9 @@
     "name": "Master Lumberjack's Trophy Journal (Full)"
   },
   {
-    "id": "T7_JOURNAL_TROPHY_WOOD_EMPTY",
-    "nome": "Diário de Troféus do Lenhador Grão-mestre (Vazio)",
-    "name": "Grandmaster Lumberjack's Trophy Journal (Empty)"
-  },
-  {
     "id": "T7_JOURNAL_TROPHY_WOOD_FULL",
     "nome": "Diário de Troféus do Lenhador Grão-mestre (Cheio)",
     "name": "Grandmaster Lumberjack's Trophy Journal (Full)"
-  },
-  {
-    "id": "T8_JOURNAL_TROPHY_WOOD_EMPTY",
-    "nome": "Diário de Troféus do Lenhador Ancião (Vazio)",
-    "name": "Elder Lumberjack's Trophy Journal (Empty)"
   },
   {
     "id": "T8_JOURNAL_TROPHY_WOOD_FULL",
@@ -30393,19 +29903,9 @@
     "name": "Elder Lumberjack's Trophy Journal (Full)"
   },
   {
-    "id": "T2_JOURNAL_TROPHY_STONE_EMPTY",
-    "nome": "Diário de Troféus do Canteiro Novato (Vazio)",
-    "name": "Novice Stonecutter's Trophy Journal (Empty)"
-  },
-  {
     "id": "T2_JOURNAL_TROPHY_STONE_FULL",
     "nome": "Diário de Troféus do Canteiro Novato (Cheio)",
     "name": "Novice Stonecutter's Trophy Journal (Full)"
-  },
-  {
-    "id": "T3_JOURNAL_TROPHY_STONE_EMPTY",
-    "nome": "Diário de Troféus do Canteiro Iniciante (Vazio)",
-    "name": "Journeyman Stonecutter's Trophy Journal (Empty)"
   },
   {
     "id": "T3_JOURNAL_TROPHY_STONE_FULL",
@@ -30413,19 +29913,9 @@
     "name": "Journeyman Stonecutter's Trophy Journal (Full)"
   },
   {
-    "id": "T4_JOURNAL_TROPHY_STONE_EMPTY",
-    "nome": "Diário de Troféus do Canteiro Adepto (Vazio)",
-    "name": "Adept Stonecutter's Trophy Journal (Empty)"
-  },
-  {
     "id": "T4_JOURNAL_TROPHY_STONE_FULL",
     "nome": "Diário de Troféus do Canteiro Adepto (Cheio)",
     "name": "Adept Stonecutter's Trophy Journal (Full)"
-  },
-  {
-    "id": "T5_JOURNAL_TROPHY_STONE_EMPTY",
-    "nome": "Diário de Troféus do Canteiro Perito (Vazio)",
-    "name": "Expert Stonecutter's Trophy Journal (Empty)"
   },
   {
     "id": "T5_JOURNAL_TROPHY_STONE_FULL",
@@ -30433,19 +29923,9 @@
     "name": "Expert Stonecutter's Trophy Journal (Full)"
   },
   {
-    "id": "T6_JOURNAL_TROPHY_STONE_EMPTY",
-    "nome": "Diário de Troféus do Canteiro Mestre (Vazio)",
-    "name": "Master Stonecutter's Trophy Journal (Empty)"
-  },
-  {
     "id": "T6_JOURNAL_TROPHY_STONE_FULL",
     "nome": "Diário de Troféus do Canteiro Mestre (Cheio)",
     "name": "Master Stonecutter's Trophy Journal (Full)"
-  },
-  {
-    "id": "T7_JOURNAL_TROPHY_STONE_EMPTY",
-    "nome": "Diário de Troféus do Canteiro Grão-mestre (Vazio)",
-    "name": "Grandmaster Stonecutter's Trophy Journal (Empty)"
   },
   {
     "id": "T7_JOURNAL_TROPHY_STONE_FULL",
@@ -30453,19 +29933,9 @@
     "name": "Grandmaster Stonecutter's Trophy Journal (Full)"
   },
   {
-    "id": "T8_JOURNAL_TROPHY_STONE_EMPTY",
-    "nome": "Diário de Troféus do Canteiro Ancião (Vazio)",
-    "name": "Elder Stonecutter's Trophy Journal (Empty)"
-  },
-  {
     "id": "T8_JOURNAL_TROPHY_STONE_FULL",
     "nome": "Diário de Troféus do Canteiro Ancião (Cheio)",
     "name": "Elder Stonecutter's Trophy Journal (Full)"
-  },
-  {
-    "id": "T2_JOURNAL_TROPHY_ORE_EMPTY",
-    "nome": "Diário de Troféus do Prospector Novato (Vazio)",
-    "name": "Novice Prospector's Trophy Journal (Empty)"
   },
   {
     "id": "T2_JOURNAL_TROPHY_ORE_FULL",
@@ -30473,19 +29943,9 @@
     "name": "Novice Prospector's Trophy Journal (Full)"
   },
   {
-    "id": "T3_JOURNAL_TROPHY_ORE_EMPTY",
-    "nome": "Diário de Troféus do Prospector Iniciante (Vazio)",
-    "name": "Journeyman Prospector's Trophy Journal (Empty)"
-  },
-  {
     "id": "T3_JOURNAL_TROPHY_ORE_FULL",
     "nome": "Diário de Troféus do Prospector Iniciante (Cheio)",
     "name": "Journeyman Prospector's Trophy Journal (Full)"
-  },
-  {
-    "id": "T4_JOURNAL_TROPHY_ORE_EMPTY",
-    "nome": "Diário de Troféus do Prospector Adepto (Vazio)",
-    "name": "Adept Prospector's Trophy Journal (Empty)"
   },
   {
     "id": "T4_JOURNAL_TROPHY_ORE_FULL",
@@ -30493,19 +29953,9 @@
     "name": "Adept Prospector's Trophy Journal (Full)"
   },
   {
-    "id": "T5_JOURNAL_TROPHY_ORE_EMPTY",
-    "nome": "Diário de Troféus do Prospector Perito (Vazio)",
-    "name": "Expert Prospector's Trophy Journal (Empty)"
-  },
-  {
     "id": "T5_JOURNAL_TROPHY_ORE_FULL",
     "nome": "Diário de Troféus do Prospector Perito (Cheio)",
     "name": "Expert Prospector's Trophy Journal (Full)"
-  },
-  {
-    "id": "T6_JOURNAL_TROPHY_ORE_EMPTY",
-    "nome": "Diário de Troféus do Prospector Mestre (Vazio)",
-    "name": "Master Prospector's Trophy Journal (Empty)"
   },
   {
     "id": "T6_JOURNAL_TROPHY_ORE_FULL",
@@ -30513,19 +29963,9 @@
     "name": "Master Prospector's Trophy Journal (Full)"
   },
   {
-    "id": "T7_JOURNAL_TROPHY_ORE_EMPTY",
-    "nome": "Diário de Troféus do Prospector Grão-mestre (Vazio)",
-    "name": "Grandmaster Prospector's Trophy Journal (Empty)"
-  },
-  {
     "id": "T7_JOURNAL_TROPHY_ORE_FULL",
     "nome": "Diário de Troféus do Prospector Grão-mestre (Cheio)",
     "name": "Grandmaster Prospector's Trophy Journal (Full)"
-  },
-  {
-    "id": "T8_JOURNAL_TROPHY_ORE_EMPTY",
-    "nome": "Diário de Troféus do Prospector Ancião (Vazio)",
-    "name": "Elder Prospector's Trophy Journal (Empty)"
   },
   {
     "id": "T8_JOURNAL_TROPHY_ORE_FULL",
@@ -30533,19 +29973,9 @@
     "name": "Elder Prospector's Trophy Journal (Full)"
   },
   {
-    "id": "T2_JOURNAL_TROPHY_FIBER_EMPTY",
-    "nome": "Diário de Troféus do Lavrador Novato (Vazio)",
-    "name": "Novice Cropper's Trophy Journal (Empty)"
-  },
-  {
     "id": "T2_JOURNAL_TROPHY_FIBER_FULL",
     "nome": "Diário de Troféus do Lavrador Novato (Cheio)",
     "name": "Novice Cropper's Trophy Journal (Full)"
-  },
-  {
-    "id": "T3_JOURNAL_TROPHY_FIBER_EMPTY",
-    "nome": "Diário de Troféus do Lavrador Iniciante (Vazio)",
-    "name": "Journeyman Cropper's Trophy Journal (Empty)"
   },
   {
     "id": "T3_JOURNAL_TROPHY_FIBER_FULL",
@@ -30553,19 +29983,9 @@
     "name": "Journeyman Cropper's Trophy Journal (Full)"
   },
   {
-    "id": "T4_JOURNAL_TROPHY_FIBER_EMPTY",
-    "nome": "Diário de Troféus do Lavrador Adepto (Vazio)",
-    "name": "Adept Cropper's Trophy Journal (Empty)"
-  },
-  {
     "id": "T4_JOURNAL_TROPHY_FIBER_FULL",
     "nome": "Diário de Troféus do Lavrador Adepto (Cheio)",
     "name": "Adept Cropper's Trophy Journal (Full)"
-  },
-  {
-    "id": "T5_JOURNAL_TROPHY_FIBER_EMPTY",
-    "nome": "Diário de Troféus do Lavrador Perito (Vazio)",
-    "name": "Expert Cropper's Trophy Journal (Empty)"
   },
   {
     "id": "T5_JOURNAL_TROPHY_FIBER_FULL",
@@ -30573,19 +29993,9 @@
     "name": "Expert Cropper's Trophy Journal (Full)"
   },
   {
-    "id": "T6_JOURNAL_TROPHY_FIBER_EMPTY",
-    "nome": "Diário de Troféus do Lavrador Mestre (Vazio)",
-    "name": "Master Cropper's Trophy Journal (Empty)"
-  },
-  {
     "id": "T6_JOURNAL_TROPHY_FIBER_FULL",
     "nome": "Diário de Troféus do Lavrador Mestre (Cheio)",
     "name": "Master Cropper's Trophy Journal (Full)"
-  },
-  {
-    "id": "T7_JOURNAL_TROPHY_FIBER_EMPTY",
-    "nome": "Diário de Troféus do Lavrador Grão-mestre (Vazio)",
-    "name": "Grandmaster Cropper's Trophy Journal (Empty)"
   },
   {
     "id": "T7_JOURNAL_TROPHY_FIBER_FULL",
@@ -30593,19 +30003,9 @@
     "name": "Grandmaster Cropper's Trophy Journal (Full)"
   },
   {
-    "id": "T8_JOURNAL_TROPHY_FIBER_EMPTY",
-    "nome": "Diário de Troféus do Lavrador Ancião (Vazio)",
-    "name": "Elder Cropper's Trophy Journal (Empty)"
-  },
-  {
     "id": "T8_JOURNAL_TROPHY_FIBER_FULL",
     "nome": "Diário de Troféus do Lavrador Ancião (Cheio)",
     "name": "Elder Cropper's Trophy Journal (Full)"
-  },
-  {
-    "id": "T2_JOURNAL_TROPHY_FISHING_EMPTY",
-    "nome": "Diário de Troféus do Pescador Novato (Vazio)",
-    "name": "Novice Fisherman's Trophy Journal (Empty)"
   },
   {
     "id": "T2_JOURNAL_TROPHY_FISHING_FULL",
@@ -30613,19 +30013,9 @@
     "name": "Novice Fisherman's Trophy Journal (Full)"
   },
   {
-    "id": "T3_JOURNAL_TROPHY_FISHING_EMPTY",
-    "nome": "Diário de Troféus do Pescador Iniciante (Vazio)",
-    "name": "Journeyman Fisherman's Trophy Journal (Empty)"
-  },
-  {
     "id": "T3_JOURNAL_TROPHY_FISHING_FULL",
     "nome": "Diário de Troféus do Pescador Iniciante (Cheio)",
     "name": "Journeyman Fisherman's Trophy Journal (Full)"
-  },
-  {
-    "id": "T4_JOURNAL_TROPHY_FISHING_EMPTY",
-    "nome": "Diário de Troféus do Pescador Adepto (Vazio)",
-    "name": "Adept Fisherman's Trophy Journal (Empty)"
   },
   {
     "id": "T4_JOURNAL_TROPHY_FISHING_FULL",
@@ -30633,19 +30023,9 @@
     "name": "Adept Fisherman's Trophy Journal (Full)"
   },
   {
-    "id": "T5_JOURNAL_TROPHY_FISHING_EMPTY",
-    "nome": "Diário de Troféus do Pescador Perito (Vazio)",
-    "name": "Expert Fisherman's Trophy Journal (Empty)"
-  },
-  {
     "id": "T5_JOURNAL_TROPHY_FISHING_FULL",
     "nome": "Diário de Troféus do Pescador Perito (Cheio)",
     "name": "Expert Fisherman's Trophy Journal (Full)"
-  },
-  {
-    "id": "T6_JOURNAL_TROPHY_FISHING_EMPTY",
-    "nome": "Diário de Troféus do Pescador Mestre (Vazio)",
-    "name": "Master Fisherman's Trophy Journal (Empty)"
   },
   {
     "id": "T6_JOURNAL_TROPHY_FISHING_FULL",
@@ -30653,19 +30033,9 @@
     "name": "Master Fisherman's Trophy Journal (Full)"
   },
   {
-    "id": "T7_JOURNAL_TROPHY_FISHING_EMPTY",
-    "nome": "Diário de Troféus do Pescador Grão-mestre (Vazio)",
-    "name": "Grandmaster Fisherman's Trophy Journal (Empty)"
-  },
-  {
     "id": "T7_JOURNAL_TROPHY_FISHING_FULL",
     "nome": "Diário de Troféus do Pescador Grão-mestre (Cheio)",
     "name": "Grandmaster Fisherman's Trophy Journal (Full)"
-  },
-  {
-    "id": "T8_JOURNAL_TROPHY_FISHING_EMPTY",
-    "nome": "Diário de Troféus do Pescador Ancião (Vazio)",
-    "name": "Elder Fisherman's Trophy Journal (Empty)"
   },
   {
     "id": "T8_JOURNAL_TROPHY_FISHING_FULL",
@@ -30673,19 +30043,9 @@
     "name": "Elder Fisherman's Trophy Journal (Full)"
   },
   {
-    "id": "T2_JOURNAL_FISHING_EMPTY",
-    "nome": "Diário do Pescador Novato (Vazio)",
-    "name": "Novice Fisherman's Journal (Empty)"
-  },
-  {
     "id": "T2_JOURNAL_FISHING_FULL",
     "nome": "Diário do Pescador Novato (Cheio)",
     "name": "Novice Fisherman's Journal (Full)"
-  },
-  {
-    "id": "T3_JOURNAL_FISHING_EMPTY",
-    "nome": "Diário do Pescador Iniciante (Vazio)",
-    "name": "Journeyman Fisherman's Journal (Empty)"
   },
   {
     "id": "T3_JOURNAL_FISHING_FULL",
@@ -30693,19 +30053,9 @@
     "name": "Journeyman Fisherman's Journal (Full)"
   },
   {
-    "id": "T4_JOURNAL_FISHING_EMPTY",
-    "nome": "Diário do Pescador Adepto (Vazio)",
-    "name": "Adept Fisherman's Journal (Empty)"
-  },
-  {
     "id": "T4_JOURNAL_FISHING_FULL",
     "nome": "Diário do Pescador Adepto (Cheio)",
     "name": "Adept Fisherman's Journal (Full)"
-  },
-  {
-    "id": "T5_JOURNAL_FISHING_EMPTY",
-    "nome": "Diário do Pescador Perito (Vazio)",
-    "name": "Expert Fisherman's Journal (Empty)"
   },
   {
     "id": "T5_JOURNAL_FISHING_FULL",
@@ -30713,29 +30063,14 @@
     "name": "Expert Fisherman's Journal (Full)"
   },
   {
-    "id": "T6_JOURNAL_FISHING_EMPTY",
-    "nome": "Diário do Pescador Mestre (Vazio)",
-    "name": "Master Fisherman's Journal (Empty)"
-  },
-  {
     "id": "T6_JOURNAL_FISHING_FULL",
     "nome": "Diário do Pescador Mestre (Cheio)",
     "name": "Master Fisherman's Journal (Full)"
   },
   {
-    "id": "T7_JOURNAL_FISHING_EMPTY",
-    "nome": "Diário do Pescador Grão-mestre (Vazio)",
-    "name": "Grandmaster Fisherman's Journal (Empty)"
-  },
-  {
     "id": "T7_JOURNAL_FISHING_FULL",
     "nome": "Diário do Pescador Grão-mestre (Cheio)",
     "name": "Grandmaster Fisherman's Journal (Full)"
-  },
-  {
-    "id": "T8_JOURNAL_FISHING_EMPTY",
-    "nome": "Diário do Pescador Ancião (Vazio)",
-    "name": "Elder Fisherman's Journal (Empty)"
   },
   {
     "id": "T8_JOURNAL_FISHING_FULL",

@@ -16,7 +16,7 @@
       </template>
     </v-banner>
     <v-row>
-      <v-col cols="12">
+      <v-col cols="11" class="pb-0">
         <v-autocomplete
           v-model="selected"
           :disabled="isUpdating"
@@ -58,42 +58,45 @@
           </template>
         </v-autocomplete>
       </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="10" v-if="selected.length > 0">
-        <v-btn block @click="getPrices" dark>Obter viagens para os selecionados</v-btn>
-      </v-col>
-      <v-col cols="10" v-if="selected.length == 0">
-        <v-btn block color="primary" @click="getBestPrices" dark>Obter melhores viagens</v-btn>
-      </v-col>
-      <v-col>
-        <v-checkbox v-model="useQuality" label="Usar qualidade"></v-checkbox>
+      <v-col class="pb-0">
+        <div class="subtitle-2">Qualidade</div>
+        <v-switch color="primary" v-model="useQuality"></v-switch>
       </v-col>
     </v-row>
     <v-row>
-      <v-col>
+      <v-col class="py-0">
         <v-select
           v-model="categories"
           :items="availableCategories"
           filled
           chips
-          label="Filters"
+          label="Categorias"
           multiple
         ></v-select>
       </v-col>
-      <v-col>
+      <v-col class="py-0">
         <v-select filled height="68" v-model="selectedTier" :items="tiers" label="Tier"></v-select>
       </v-col>
-      <v-col>
-        <v-select filled height="68" v-model="fromCity" item :items="getFromCities()" label="From"></v-select>
+      <v-col class="py-0">
+        <v-select
+          filled
+          height="68"
+          v-model="fromCity"
+          item
+          :items="getFromCities()"
+          label="De cidade"
+        ></v-select>
       </v-col>
-      <v-col>
-        <v-select filled height="68" v-model="toCity" :items="getToCities()" label="To"></v-select>
+      <v-col class="py-0">
+        <v-select filled height="68" v-model="toCity" :items="getToCities()" label="Para cidade"></v-select>
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12">
-        <v-btn block @click="applyFilter" dark>Aplicar filtros</v-btn>
+      <v-col cols="12" v-if="selected.length > 0">
+        <v-btn block @click="getPrices" dark>Obter viagens para os selecionados</v-btn>
+      </v-col>
+      <v-col cols="12" v-if="selected.length == 0">
+        <v-btn block color="primary" @click="getBestPrices" dark>Obter melhores viagens</v-btn>
       </v-col>
     </v-row>
     <v-row>
@@ -131,7 +134,7 @@
                     <v-icon color="white">mdi-arrow-right</v-icon>
                     {{travel.to}}
                     <v-icon color="white">mdi-cash-usd-outline</v-icon>
-                    {{travel.profit}}
+                    {{formatPrice(travel.profit)}}
                   </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
@@ -145,9 +148,19 @@
             <div v-for="city in item.cities" :key="city.name">
               <v-list-item :style="`background-color: ${cityColor(city.name)}`">
                 <v-list-item-content class="align-self-start">
-                  <v-list-item-title
-                    class="white--text"
-                  >{{city.name}} - {{city.price}} - {{shortDate(city.date)}}</v-list-item-title>
+                  <v-list-item-title class="white--text">
+                    <v-row no-gutters>
+                      <v-col>
+                        <v-icon color="white">mdi-calendar</v-icon>
+                        {{shortDate(city.date)}}
+                      </v-col>
+                      <v-col>{{city.name}}</v-col>
+                      <v-col>
+                        <v-icon color="white">mdi-cash-usd-outline</v-icon>
+                        {{formatPrice(city.price)}}
+                      </v-col>
+                    </v-row>
+                  </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
               <v-divider></v-divider>
@@ -186,12 +199,7 @@
 <script>
 import { format } from 'date-fns'
 
-import {
-  pricesByIds,
-  getItems,
-  applyFilters,
-  filteredByPage
-} from '../services/api'
+import { pricesByIds, getItems, filteredByPage } from '../services/api'
 
 const baseImageUrl =
   'https://albiononline2d.ams3.cdn.digitaloceanspaces.com/thumbnails/128'
@@ -208,6 +216,7 @@ export default {
       items: [],
       results: [],
       cityColors: {
+        QUALQUER: 'transparent',
         'Black Market': 'black',
         Caerleon: 'red',
         Bridgewatch: 'orange',
@@ -217,24 +226,24 @@ export default {
         Martlock: 'blue'
       },
       availableCategories: [
-        'ARMOR',
-        'WEAPON',
-        'CONSUMABLE',
-        'RESOURCES',
-        'FARM',
-        'MOUNTS'
+        'ARMADURA',
+        'ARMA',
+        'CONSUMIVEL',
+        'RECURSOS',
+        'FAZENDO',
+        'MONTARIAS'
       ],
       period: 1,
       page: 1,
       perPage: 9,
       pageCount: 0,
       loading: false,
-      tiers: ['ANY', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8'],
-      selectedTier: 'ANY',
+      tiers: ['QUALQUER', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8'],
+      selectedTier: 'QUALQUER',
       useQuality: false,
       categories: [],
-      fromCity: 'ANY',
-      toCity: 'ANY'
+      fromCity: 'QUALQUER',
+      toCity: 'QUALQUER'
     }
   },
   watch: {
@@ -255,14 +264,26 @@ export default {
       const quality = item.quality || 0
       return `qual${quality}`
     },
-    getFromCities () {
-      if (this.toCity === 'ANY') {
-        return Object.keys(this.cityColors)
+    formatPrice (price) {
+      if (price < 999) {
+        return price
       }
-      return Object.keys(this.cityColors).filter(key => key !== this.toCity)
+      const k = price / 1000
+      const kSufix = Math.floor(k) > 999 ? 'KK' : 'K'
+      return `${Math.floor(k * 10) / 10}${kSufix}`
+    },
+    getFromCities () {
+      if (this.toCity === 'QUALQUER') {
+        return Object.keys(this.cityColors).filter(
+          key => key !== 'Black Market'
+        )
+      }
+      return Object.keys(this.cityColors).filter(
+        key => key !== this.toCity && key !== 'Black Market'
+      )
     },
     getToCities () {
-      if (this.fromCity === 'ANY') {
+      if (this.fromCity === 'QUALQUER') {
         return Object.keys(this.cityColors)
       }
       return Object.keys(this.cityColors).filter(key => key !== this.fromCity)
@@ -286,7 +307,7 @@ export default {
     },
     byCategory (category) {
       this.selected = this.items
-        .filter(item => item.inclueds(category))
+        .filter(item => item.includes(category))
         .map(item => item.id)
     },
     getPrices () {
@@ -294,7 +315,10 @@ export default {
         return
       }
       this.loading = true
-      pricesByIds(this.selected, this.period).then(processedItems => {
+      pricesByIds(this.selected, {
+        period: this.period,
+        useQuality: this.useQuality
+      }).then(processedItems => {
         this.results = processedItems
         this.pageCount = 0
         this.loading = false
@@ -302,26 +326,19 @@ export default {
     },
     getBestPrices () {
       this.loading = true
-      filteredByPage(
-        this.categories,
-        this.selectedTier,
-        this.period,
-        this.useQuality,
-        this.page
-      ).then(result => {
+      const filters = {
+        categories: this.categories,
+        selectedTier: this.selectedTier,
+        period: this.period,
+        useQuality: this.useQuality,
+        fromCity: this.fromCity,
+        toCity: this.toCity
+      }
+      filteredByPage(filters, this.page).then(result => {
         this.pageCount = result.pageCount
         this.results = result.pageItems
         this.loading = false
       })
-    },
-    applyFilter () {
-      this.loading = true
-      applyFilters(
-        this.period,
-        this.categories,
-        this.selectedTier,
-        this.useQuality
-      ).then(this.getBestPrices)
     },
     clearCache () {
       localStorage.clear()

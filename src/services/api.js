@@ -140,28 +140,119 @@ const processAllPrices = async (filters) => {
 
 const cacheKey = 'cache'
 const findBestPrices = async (filters) => {
-  const { period } = filters
+  const { useQuality, fromCity, toCity } = filters
+  const cachedFilters = { useQuality, fromCity, toCity }
   const cachedJSON = localStorage.getItem(cacheKey)
   const now = new Date()
   if (cachedJSON != null) {
     const cached = JSON.parse(cachedJSON)
     const diff = differenceInCalendarDays(now, new Date(cached.date))
-    if (diff <= period && cached.items.length > 0 && JSON.stringify(filters) === JSON.stringify(cached.filters)) {
+    if (diff <= filters.period && cached.items.length > 0 && JSON.stringify(cachedFilters) === JSON.stringify(cached.filters)) {
       return cached.items
     }
   }
   const sortedResult = await processAllPrices(filters)
-  const cache = { date: now, items: sortedResult, filters }
+  const cache = { date: now, items: sortedResult, filters: cachedFilters }
   localStorage.setItem(cacheKey, JSON.stringify(cache))
   return sortedResult
 }
 
-const tank = ['MACE_MORGANA', '2H_FLAIL', '2H_TWINSCYTHE_HELL', '2H_RAM_KEEPER', 'HEAD_PLATE_SET1', 'HEAD_PLATE_SET2', 'HEAD_LEATHER_HELL', 'ARMOR_PLATE_KEEPER', 'ARMOR_PLATE_SET3', 'SHOES_CLOTH_SET3', 'CAPEITEM_FW_MARTLOCK']
+const tank = [
+  'MACE_MORGANA',
+  '2H_FLAIL',
+  '2H_TWINSCYTHE_HELL',
+  '2H_RAM_KEEPER',
+  'HEAD_PLATE_SET1',
+  'HEAD_PLATE_SET2',
+  'HEAD_LEATHER_HELL',
+  'ARTEFACT_HEAD_PLATE_KEEPER',
+  'ARMOR_PLATE_KEEPER',
+  'ARMOR_PLATE_SET2',
+  'ARMOR_PLATE_SET3',
+  'ARTEFACT_ARMOR_PLATE_HELL',
+  'SHOES_CLOTH_SET3',
+  'SHOES_LEATHER_SET2',
+  'CAPEITEM_FW_MARTLOCK'
+]
+
+const ranged = [
+  '2H_BOW_HELL',
+  '2H_LONGBOW',
+  '2H_BOW_KEEPER',
+  '2H_CROSSBOWLARGE_MORGANA',
+  '2H_REPEATINGCROSSBOW_UNDEAD',
+  '2H_CURSEDSTAFF_MORGANA',
+  '2H_ICECRYSTAL_UNDEAD',
+  '2H_FROSTSTAFF',
+  'ARTEFACT_2H_FIRESTAFF_HELL',
+  'ARTEFACT_2H_INFERNOSTAFF_MORGANA',
+  'HEAD_PLATE_SET2',
+  'HEAD_LEATHER_SET1',
+  'HEAD_LEATHER_ROYAL',
+  'HEAD_LEATHER_SET3',
+  'ARMOR_CLOTH_SET2',
+  'ARMOR_CLOTH_SET1',
+  'CAPEITEM_FW_FORTSTERLING'
+]
+
+const healer = [
+  '2H_HOLYSTAFF_HELL',
+  '2H_DIVINESTAFF',
+  '2H_HOLYSTAFF',
+  '2H_WILDSTAFF',
+  '2H_NATURESTAFF_KEEPER',
+  'HEAD_LEATHER_SET1',
+  'HEAD_LEATHER_SET3',
+  'ARMOR_CLOTH_SET2',
+  'CAPEITEM_FW_FORTSTERLING'
+]
+
+const support = [
+  'ARTEFACT_2H_ENIGMATICORB_MORGANA',
+  'ARTEFACT_2H_ARCANESTAFF_HELL',
+  'ARTEFACT_2H_ICEGAUNTLETS_HELL',
+  'HEAD_PLATE_SET2',
+  'HEAD_LEATHER_SET3',
+  'ARMOR_PLATE_KEEPER',
+  'ARMOR_PLATE_SET2',
+  'ARMOR_PLATE_SET3',
+  'ARTEFACT_ARMOR_PLATE_HELL',
+  'CAPEITEM_FW_MARTLOCK'
+]
+
+const meele = [
+  '2H_DUALSCIMITAR_UNDEAD',
+  '2H_HALBERD',
+  'HEAD_PLATE_SET1',
+  'ARTEFACT_HEAD_PLATE_KEEPER',
+  'HEAD_LEATHER_ROYAL',
+  'HEAD_CLOTH_SET1',
+  'ARTEFACT_ARMOR_LEATHER_UNDEAD',
+  'ARMOR_PLATE_SET1',
+  'ARMOR_LEATHER_SET3',
+  'SHOES_CLOTH_SET1',
+  'SHOES_CLOTH_SET3',
+  'CAPEITEM_FW_MARTLOCK',
+  'CAPEITEM_FW_FORTSTERLING',
+  'CAPEITEM_KEEPER'
+]
 
 const getCategoriesKeywords = categories => {
   let keywords = []
-  if (categories.includes('ZVZ')) {
+  if (categories.includes('ZVZ - TANK')) {
     keywords.push(...tank)
+  }
+  if (categories.includes('ZVZ - RANGED')) {
+    keywords.push(...ranged)
+  }
+  if (categories.includes('ZVZ - MEELE')) {
+    keywords.push(...meele)
+  }
+  if (categories.includes('ZVZ - HEALER')) {
+    keywords.push(...healer)
+  }
+  if (categories.includes('ZVZ - SUPORTE')) {
+    keywords.push(...support)
   }
   if (categories.includes('ARMADURA')) {
     keywords.push('_ARMOR_', '_SHOES_', '_HEAD_', '_CAPE', '_BAG')
@@ -172,16 +263,17 @@ const getCategoriesKeywords = categories => {
   if (categories.includes('CONSUMIVEL')) {
     keywords.push('_MEAL', '_POTION')
   }
-  if (categories.includes('RECURSOS')) {
-    keywords.push('_ROCK_', '_WOOD_', '_FIBER_', '_ORE_', '_HIDE_', '_STONEBLOCK_', '_PLANKS_', '_METALBAR_', '_LEATHER_', '_CLOTH_')
-  }
+  // if (categories.includes('RECURSOS')) {
+  //   keywords.push('_ROCK_', '_WOOD_', '_FIBER_', '_ORE_', '_HIDE_', '_STONEBLOCK_', '_PLANKS_', '_METALBAR_', '_LEATHER_', '_CLOTH_')
+  // }
   if (categories.includes('FAZENDO')) {
     keywords.push('_FARM_')
   }
   if (categories.includes('MONTARIAS')) {
     keywords.push('_MOUNT_')
   }
-  return keywords
+  const uniqueKeywords = [...new Set(keywords)]
+  return uniqueKeywords
 }
 
 const applyFilters = async (filters) => {

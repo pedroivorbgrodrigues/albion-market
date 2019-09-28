@@ -3,7 +3,7 @@
     <v-overlay :value="loading">
       <v-progress-circular :size="128" indeterminate></v-progress-circular>
     </v-overlay>
-    <v-banner single-line elevation="2" v-if="$vuetify.breakpoint.lgAndUp">
+    <v-banner single-line elevation="2">
       Quer preços mais atualizados? Rode o programa enquanto acessa as AH's
       <template v-slot:actions>
         <v-btn text @click="clearCache">Limpar cache</v-btn>
@@ -20,15 +20,17 @@
         <v-autocomplete
           v-model="selected"
           :disabled="isUpdating"
-          :items="items"
+          :items="found"
           filled
           chips
           color="blue-grey lighten-2"
           label="Selecionar"
           item-text="nome"
           item-value="id"
+          hide-no-data
+          hide-selected
           multiple
-          validate-on-blur
+          :search-input.sync="search"
         >
           <template v-slot:selection="data">
             <v-chip
@@ -210,7 +212,7 @@ import { format } from 'date-fns'
 import { pricesByIds, getItems, filteredByPage } from '../services/api'
 
 const baseImageUrl =
-  'https://albiononline2d.ams3.cdn.digitaloceanspaces.com/thumbnails/128'
+  'https://gameinfo.albiononline.com/api/gameinfo/items'
 
 export default {
   created: function () {
@@ -222,6 +224,8 @@ export default {
       selected: [],
       isUpdating: false,
       items: [],
+      search: null,
+      found: [],
       results: [],
       cityColors: {
         QUALQUER: 'transparent',
@@ -234,11 +238,14 @@ export default {
         Martlock: 'blue'
       },
       availableCategories: [
-        'ZVZ',
+        'ZVZ - TANK',
+        'ZVZ - RANGED',
+        'ZVZ - MEELE',
+        'ZVZ - HEALER',
+        'ZVZ - SUPPORT',
         'ARMADURA',
         'ARMA',
         'CONSUMIVEL',
-        'RECURSOS',
         'FAZENDO',
         'MONTARIAS'
       ],
@@ -264,9 +271,27 @@ export default {
     },
     page (val) {
       this.getBestPrices()
+    },
+    search (searchInput) {
+      if (!searchInput) {
+        return
+      }
+      this.fetchItemsDebounced(searchInput)
     }
   },
   methods: {
+    fetchEntries (searchInput) {
+      const query = (searchInput || '').toLowerCase()
+      this.found = this.items.filter(item => {
+        return item.nome.toLowerCase().indexOf(query) > -1
+      })
+    },
+    fetchItemsDebounced (searchInput) {
+      clearTimeout(this._searchTimerId)
+      this._searchTimerId = setTimeout(() => {
+        this.fetchEntries(searchInput)
+      }, 500) /* 500ms throttle */
+    },
     icon (id) {
       return `${baseImageUrl}/${id}`
     },
